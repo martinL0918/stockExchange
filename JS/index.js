@@ -32,6 +32,7 @@ document.getElementById("submit").addEventListener('click', () =>{
         userData.user.updateProfile({
             displayName: user.name
         })
+        console.log(user.name)
         location.replace("login.html")
     }).catch (function failure(error){
         var errorCode = error.code;

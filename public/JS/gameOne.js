@@ -12,17 +12,34 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   const database = firebase.database();
- 
-  document.getElementById("logout").addEventListener('click', () => {
-    firebase.auth().signOut().then(function() {
-      alert("你登出了")
-      location.replace("login.html")
-    })
-  })
-  function redirect(){
-    // For testing
-    location.replace("gameOne.html");
- }
+  var ref = firebase.database().ref("/stocks");
+  var first_price
+  var second_price
+  var third_price
+  var forth_price
+
+
+
+function repaint(){
+    document.getElementById("stock_price_1").innerHTML = first_price
+}
+
+function changePrice(){
+    setTimeout(function() {
+        ref.update({
+            AED : 60000 + Math.floor(Math.random() * (1000  - 100) * 100)
+        })
+    },5000);
+}
+ref.on("value", function(snapshot){
+  console.log(snapshot.val().AED);
+  first_price = snapshot.val().AED;
+  changePrice()
+  repaint()
+}, function (error){
+  console.log("Error: "+error.code)
+})
+
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -32,9 +49,8 @@ var firebaseConfig = {
       var isAnonymous = user.isAnonymous;
       var uid = user.uid;
       var providerData = user.providerData;
-      document.getElementById("remind-message").innerHTML = "歡迎回來! " + user.displayName
-      // ...
+      console.log ("Welcome "+ user.displayName)   // ...
     } else {
-        document.getElementById("remind-message").innerHTML = "請先登入遊戲" ;
+
     }
   });
