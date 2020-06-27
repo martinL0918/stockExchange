@@ -18,9 +18,11 @@ body{
 
 .acc-manager{
     padding: 30px;
+
 }
 
 .form-control{
+    float: right;
     align-self: center;
     width: 200px;
 }
@@ -29,8 +31,8 @@ body{
     writing-mode: vertical-rl;
     text-orientation: mixed;
     float: left;
-    font-size: 60px;
-    background: -webkit-linear-gradient(rgb(56, 129, 224),#86b5eb);
-    background-clip: text;
+    font-size: 100px;
+    background: -webkit-linear-gradient(#2c4ad1,#a1d3f5);
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
