@@ -26,6 +26,25 @@ function writeUserData(){
     })*/
 
     // For Testing
-    database.ref('/mode/players/playerone').set({money:5000000});
+    var playerID = Math.floor(Math.random() * (9999999 - 1000000) + 1000000)
+    database.ref('/mode/players/'+ playerID).set({money:5000000});
 }
+document.getElementById("submit").addEventListener('click', () =>{
+    let user = {
+        email: email.value,
+        pwd: pwd.value,
+        name: nickname.value
+    }
+    firebase.auth().createUserWithEmailAndPassword(user.email, user.pwd).then( function success(userData){
+        var uid = userData.user.uid
+        database.ref(uid).set({money:5000000,
+                               email: user.email,
+                               name: user.name});
+    }).catch (function failure(error){
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode + " " + errorMessage);
+    })
+})
+
  
