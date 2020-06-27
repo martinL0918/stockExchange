@@ -6,12 +6,14 @@
         <link rel="stylesheet" href="CSS/style.css">
     </head>
     <body>
+        <button onclick="readUserData()">Update</button>
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
         <br>
         帳號<input id="email">
         密碼<input id="pwd">
-        匿稱<input id="nickname">
-        <button onclick="" id="submit">創帳號</button>
+        <button onclick="" id="login">登入</button>
+        <br>
+        <label id="welcome"></label>
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
@@ -22,7 +24,7 @@
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
         <script src = "https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js" ></script> 
-        <script src="index.js"></script>
+        <script src="login.js"></script>
         
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
