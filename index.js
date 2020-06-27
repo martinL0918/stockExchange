@@ -26,10 +26,13 @@ document.getElementById("submit").addEventListener('click', () =>{
     }
     firebase.auth().createUserWithEmailAndPassword(user.email, user.pwd).then( function success(userData){
         var uid = userData.user.uid
-        database.ref(uid).set({money:5000000,
+        database.ref("/players/" + uid).set({money:5000000,
                                email: user.email,
                                name: user.name});
-            redirect()
+        userData.user.updateProfile({
+            displayName: user.name
+        })
+        location.replace("login.html")
     }).catch (function failure(error){
         var errorCode = error.code;
         var errorMessage = error.message;

@@ -1,21 +1,18 @@
 <html>
     <head>
-        <title>股票交易市埸 | Stock Overflow</title>
+        <title>遊戲模式 | Stock Overflow</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="CSS/style.css">
     </head>
     <body>
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-        <br>
-        帳號<input id="email">
-        密碼<input id="pwd">
-        <button id="login">登入</button>
-        <br>
-        <label id="welcome"></label>
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-
+        <p id= "remind-message">Ya</p>
+        <button id="logout">登出</button><br>
+        <button onclick="redirect()""> 模式1</button>
+        <button disabled> 模式2</button>
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
 
@@ -23,7 +20,7 @@
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
         <script src = "https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js" ></script> 
-        <script src="login.js"></script>
+        <script src="gameMode.js"></script>
         
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
