@@ -11,9 +11,10 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
 
 function writeUserData(){
-    var playersRef = firebase.database().ref("/mode1/players/")
+   /* var playersRef = firebase.database().ref('/')
 
     playersRef.set({
         Martin:{
@@ -22,6 +23,9 @@ function writeUserData(){
         Test:{
             money: 20000
         }
-    })
+    })*/
+    
+    // For Testing
+    database.ref('/').set({a:123});
 }
  
