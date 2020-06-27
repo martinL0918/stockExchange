@@ -19,6 +19,7 @@ var firebaseConfig = {
       location.replace("login.html")
     })
   })
+
   function redirect(){
     // For testing
     location.replace("gameOne.html");

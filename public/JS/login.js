@@ -20,7 +20,7 @@ document.getElementById("login").addEventListener('click', () => {
     }
     firebase.auth().signInWithEmailAndPassword(user.email, user.pwd).then(function success(userData) {
         console.log("Successfully Login")
-        document.getElementById("welcome").innerHTML = "Successfully Login"
+        //document.getElementById("welcome").innerHTML = "Successfully Login"
       }).catch (function failure(error){
          // Handle Errors here.
         var errorCode = error.code;
@@ -28,4 +28,31 @@ document.getElementById("login").addEventListener('click', () => {
         console.log (errorCode + " " + errorMessage)
       })
     })
+function redirect(){
+      // For testing
+      location.replace("gameMode.html");
+}
+
+firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var providerData = user.providerData;
+        alert("Welcome!"+ user.displayName)
+        redirect()
+        // ...
+      } else {
+        console.log("Good Bye")
+      }
+    });
+/*document.getElementById("logout").addEventListener('click', () => {
+  firebase.auth().signOut().then(function() {
+    alert("你登出了")
+  })
+})*/
+
 

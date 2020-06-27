@@ -13,10 +13,9 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-function writeUserData(){
+function redirect(){
     // For testing
-    var playerID = Math.floor(Math.random() * (9999999 - 1000000) + 1000000)
-    database.ref('/mode/players/'+ playerID).set({money:5000000});
+    location.replace("https://stockmarket-d6c7e.web.app/login.html");
 }
 //Sign up 登入功能
 document.getElementById("submit").addEventListener('click', () =>{
@@ -27,9 +26,14 @@ document.getElementById("submit").addEventListener('click', () =>{
     }
     firebase.auth().createUserWithEmailAndPassword(user.email, user.pwd).then( function success(userData){
         var uid = userData.user.uid
-        database.ref(uid).set({money:5000000,
+        database.ref("/players/" + uid).set({money:5000000,
                                email: user.email,
                                name: user.name});
+        userData.user.updateProfile({
+            displayName: user.name
+        })
+        console.log(user.name)
+        location.replace("login.html")
     }).catch (function failure(error){
         var errorCode = error.code;
         var errorMessage = error.message;
