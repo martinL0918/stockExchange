@@ -1,0 +1,36 @@
+body{
+    background-color: #121212;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+}
+
+.login-div{
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 30px;
+    vertical-align: middle;
+}
+
+.acc-manager{
+    padding: 30px;
+}
+
+.form-control{
+    align-self: center;
+    width: 200px;
+}
+
+#login-vertical{
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    float: left;
+    font-size: 60px;
+    background: -webkit-linear-gradient(rgb(56, 129, 224),#86b5eb);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

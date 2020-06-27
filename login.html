@@ -7,10 +7,15 @@
     </head>
     <body>
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-        <br>
-        帳號<input id="email">
-        密碼<input id="pwd">
-        <button id="login">登入</button>
+        <br><div class="login-div">
+        <h4 id = "login-vertical">LOGIN</h4>
+        <div class="acc-manager">
+        <h4>帳號</h4><input id="email" type="text" class="form-control"><br></div>
+        <div class="acc-manager">
+        <h4>密碼</h4><input id="pwd" type="password" class="form-control"><br>
+        </div>
+        <button id="login" type="button" class="btn btn-outline-secondary">登入</button>
+        </div>
         <br>
         <label id="welcome"></label>
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->

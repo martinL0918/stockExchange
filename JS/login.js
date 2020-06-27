@@ -42,7 +42,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         var isAnonymous = user.isAnonymous;
         var uid = user.uid;
         var providerData = user.providerData;
-        alert("Welcome!"+ user.displayName)
+        alert("Welcome! "+ user.displayName)
         redirect()
         // ...
       } else {
