@@ -24,8 +24,8 @@ function writeUserData(){
             money: 20000
         }
     })*/
-    
+
     // For Testing
-    database.ref('/').set({a:123});
+    database.ref('/mode/players/playerone').set({money:5000000});
 }
  
