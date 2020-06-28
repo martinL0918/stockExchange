@@ -13,11 +13,19 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   const database = firebase.database();
   var ref = firebase.database().ref("/stocks");
-  var first_price
-  var second_price
-  var third_price
-  var forth_price
-  var lastModified 
+  var first_price;
+  var second_price;
+  var third_price;
+  var forth_price;
+  var lastModified ;
+  var asset;
+  var holdings_1;
+  var holdings_2;
+  var holdings_3;
+  var holdings_4;
+  var user_id;
+  var nickName;
+
  
 ref.on("value", function(snapshot){
     first_price = snapshot.val().ABCD;
@@ -31,11 +39,16 @@ ref.on("value", function(snapshot){
   })
 
 function repaint(){
-    document.getElementById("stock_price_1").innerHTML = first_price
-    document.getElementById("stock_price_2").innerHTML = second_price
-    document.getElementById("stock_price_3").innerHTML = third_price
-    document.getElementById("stock_price_4").innerHTML = forth_price
-    document.getElementById("error-checking").innerHTML = lastModified
+    document.getElementById("stock_price_1").innerHTML = first_price;
+    document.getElementById("stock_price_2").innerHTML = second_price;
+    document.getElementById("stock_price_3").innerHTML = third_price;
+    document.getElementById("stock_price_4").innerHTML = forth_price;
+    document.getElementById("asset").innerHTML = asset;
+    document.getElementById("stock_holding_1").innerHTML = holdings_1;
+    document.getElementById("stock_holding_2").innerHTML = holdings_2;
+    document.getElementById("stock_holding_3").innerHTML = holdings_3;
+    document.getElementById("stock_holding_4").innerHTML = holdings_4;
+    document.getElementById("name_field").innerHTML = nickName;
 }
 
 function changePrice(){
@@ -87,8 +100,21 @@ function changePrice(){
       var photoURL = user.photoURL;
       var isAnonymous = user.isAnonymous;
       var uid = user.uid;
+      user_id = user.uid;
       var providerData = user.providerData;
       console.log("Welcome "+ user.displayName)  // ...
+      firebase.database().ref("players/"+ user.uid).on("value", function(snapshot){
+      asset = snapshot.val().money
+      holdings_1 = snapshot.val().hold_1
+      holdings_2 = snapshot.val().hold_2
+      holdings_3 = snapshot.val().hold_3
+      holdings_4 = snapshot.val().hold_4;
+      nickName = snapshot.val().name
+      console.log(nickName)
+      repaint()
+     }, function (error){
+       console.log("Error: "+error.code)
+     })
       repaint()
       setTimeout(updateRegularly,1500);
     } else {
@@ -111,3 +137,27 @@ function changePrice(){
   setInterval(function(){
       updateRegularly()
   },10000)
+
+  function lightTheme(){
+    document.getElementsByTagName("BODY")[0].style.backgroundColor = "white";
+    document.getElementsByTagName("BODY")[0].style.color = "black";
+  }
+  function darkTheme(){
+    document.getElementsByTagName("BODY")[0].style.backgroundColor = "#121212";
+    document.getElementsByTagName("BODY")[0].style.color = "white";
+  }
+
+  document.getElementById("buy_1").addEventListener('click', () => {
+    var quan = number_1.value
+    if (asset >= first_price * quan & quan >=0){
+        holdings_1 = Number(holdings_1)+ Number(quan)
+        asset = asset - (first_price * quan)
+      firebase.database().ref("players/"+ user_id).update({
+        hold_1 : holdings_1,
+        money  : asset.toFixed(2)
+      })
+    }
+    else{
+      alert("You don't have enough money")
+    }
+  })

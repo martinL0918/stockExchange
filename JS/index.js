@@ -28,7 +28,12 @@ document.getElementById("submit").addEventListener('click', () =>{
         var uid = userData.user.uid
         database.ref("/players/" + uid).set({money:5000000,
                                email: user.email,
-                               name: user.name});
+                               name: user.name,
+                               hold_1: 0,
+                               hold_2: 0,
+                               hold_3: 0,
+                               hold_4: 0,
+                            });
         userData.user.updateProfile({
             displayName: user.name
         })
