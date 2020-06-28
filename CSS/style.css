@@ -5,7 +5,7 @@ body{
     font-size: 20px;
 }
 
-.login-div{
+.acc-div{
     border-top: 1px solid #ebebeb;
     border-bottom: 1px solid #ebebeb;
     margin-left: 20%;
@@ -27,7 +27,7 @@ body{
     width: 200px;
 }
 
-#login-vertical{
+.acc-vertical{
     writing-mode: vertical-rl;
     text-orientation: mixed;
     float: left;
