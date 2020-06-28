@@ -24,8 +24,8 @@
                     <td id="stock_price_1"</td>
                     <td>
                         <input type="number" style="width:35%">
-                        <button id="buy_One" class="btn btn-primary btn-sm" style="margin-left:2%;margin-right: 2%;">購買</button>
-                        <button id="sell_One" class="btn btn-primary btn-sm">賣出</button>
+                        <button id="buy_1" class="btn btn-primary btn-sm" style="margin-left:2%;margin-right: 2%;">購買</button>
+                        <button id="sell_1" class="btn btn-primary btn-sm">賣出</button>
                     </td>
                 </tr>
                 <tr>
@@ -38,7 +38,29 @@
                         <button id="sell_2" class="btn btn-primary btn-sm">賣出</button>
                     </td>
                 </tr>
+                <tr>
+                    <td id="stock_num_3"">3</td>
+                    <td id="stock_label_3"">HATE</td>
+                    <td id="stock_price_3"></td>
+                    <td>
+                        <input type="number" style="width:35%">
+                        <button id="buy_3" class="btn btn-primary btn-sm" style="margin-left:2%;margin-right: 2%;">購買</button>
+                        <button id="sell_3" class="btn btn-primary btn-sm">賣出</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="stock_num_4"">4</td>
+                    <td id="stock_label_4"">DMD</td>
+                    <td id="stock_price_4"></td>
+                    <td>
+                        <input type="number" style="width:35%">
+                        <button id="buy_4" class="btn btn-primary btn-sm" style="margin-left:2%;margin-right: 2%;">購買</button>
+                        <button id="sell_4" class="btn btn-primary btn-sm">賣出</button>
+                    </td>
+                </tr>
             </table>
+            <p id="error-checking">最後更新時間: </p>
+            <button onclick="setTime()">設定時間</button>
     </div>
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>

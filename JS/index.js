@@ -22,7 +22,7 @@ document.getElementById("submit").addEventListener('click', () =>{
     let user = {
         email: email.value,
         pwd: pwd.value,
-        name: nickname.value
+        name: nickname.value + ""
     }
     firebase.auth().createUserWithEmailAndPassword(user.email, user.pwd).then( function success(userData){
         var uid = userData.user.uid
