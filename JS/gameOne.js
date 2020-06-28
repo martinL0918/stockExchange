@@ -28,10 +28,10 @@ var firebaseConfig = {
 
  
 ref.on("value", function(snapshot){
-    first_price = snapshot.val().ABCD;
-    second_price = snapshot.val().EFGH;
-    third_price = snapshot.val().HATE;
-    forth_price = snapshot.val().DMD;
+    first_price = snapshot.val().CBY;
+    second_price = snapshot.val().EFS;
+    third_price = snapshot.val().EPC;
+    forth_price = snapshot.val().SFL;
     lastModified = snapshot.val().lastUpdate
     repaint()
   }, function (error){
@@ -63,8 +63,9 @@ function changePrice(){
     var stock = [first_price,second_price,third_price,forth_price]
     console.log(stock)
     for (var i=0;i<4;i++){
-      var luck = Math.round(Math.random())
-      if (luck ==0){
+      var luck = Math.round(Math.random() * ( 2 - 0 )+ 0)
+      console.log(luck)
+      if (luck ==0 || luck == 2){
         //stock[i] = 1000;
         stock[i]  = (stock[i] * (1+ (Math.random() * (0.03 - 0.01) + 0.01))).toFixed(2);
         console.log(i + ":   " + stock[i])
@@ -82,10 +83,10 @@ function changePrice(){
     if (seconds >= 5-0.05){
         ref.update({
             lastUpdate : currentTime.getTime(),
-            ABCD: stock[0],
-            EFGH: stock[1],
-            HATE: stock[2],
-            DMD : stock[3]
+            CBY: stock[0],
+            EFS: stock[1],
+            EPC: stock[2],
+            SFL : stock[3]
             })    
   }
 }
@@ -110,7 +111,6 @@ function changePrice(){
       holdings_3 = snapshot.val().hold_3
       holdings_4 = snapshot.val().hold_4;
       nickName = snapshot.val().name
-      console.log(nickName)
       repaint()
      }, function (error){
        console.log("Error: "+error.code)
@@ -149,7 +149,7 @@ function changePrice(){
 
   document.getElementById("buy_1").addEventListener('click', () => {
     var quan = number_1.value
-    if (asset >= first_price * quan & quan >=0){
+    if (asset >= first_price * quan && quan >0){
         holdings_1 = Number(holdings_1)+ Number(quan)
         asset = asset - (first_price * quan)
       firebase.database().ref("players/"+ user_id).update({
@@ -159,5 +159,20 @@ function changePrice(){
     }
     else{
       alert("You don't have enough money")
+    }
+  })
+
+  document.getElementById("sell_1").addEventListener('click', () => {
+    var quan = number_1.value
+    if (holdings_1 >= quan && quan >0){
+      holdings_1 = Number(holdings_1) - Number(quan);
+      asset = Number(asset) + (Number(quan) * Number(first_price));
+      firebase.database().ref("players/"+ user_id).update({
+        hold_1 : holdings_1,
+        money  : asset.toFixed(2)
+      })
+    }
+    else{
+      alert("You don't have enough stocks")
     }
   })
