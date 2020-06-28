@@ -9,13 +9,59 @@
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-       <table style="border:1px solid;width:80%">
-           <tr>
-               <td id="stock_num_1" style="border:1px solid">1</td>
-               <td id="stock_label_1" style="border:1px solid">ABCD</td>
-               <td id="stock_price_1" style="border:1px solid">10000</td>
-           </tr>
-       </table>
+      <div class = "container">
+            <h1>交易所</h1>
+            <table class="table table-light table-striped">
+                <tr>
+                    <td style="width:10%"">股票編號</td>
+                    <td style="width:20%">股票名稱</td>
+                    <td style="width:15%">股票價格</td>
+                    <td style="width:45%">操作</td>
+                </tr>
+                <tr>
+                    <td id="stock_num_1"">1</td>
+                    <td id="stock_label_1"">ABCD</td>
+                    <td id="stock_price_1"</td>
+                    <td>
+                        <input type="number" style="width:35%">
+                        <button id="buy_1" class="btn btn-primary btn-sm" style="margin-left:2%;margin-right: 2%;">購買</button>
+                        <button id="sell_1" class="btn btn-primary btn-sm">賣出</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="stock_num_2"">2</td>
+                    <td id="stock_label_2"">EFGH</td>
+                    <td id="stock_price_2"></td>
+                    <td>
+                        <input type="number" style="width:35%">
+                        <button id="buy_2" class="btn btn-primary btn-sm" style="margin-left:2%;margin-right: 2%;">購買</button>
+                        <button id="sell_2" class="btn btn-primary btn-sm">賣出</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="stock_num_3"">3</td>
+                    <td id="stock_label_3"">HATE</td>
+                    <td id="stock_price_3"></td>
+                    <td>
+                        <input type="number" style="width:35%">
+                        <button id="buy_3" class="btn btn-primary btn-sm" style="margin-left:2%;margin-right: 2%;">購買</button>
+                        <button id="sell_3" class="btn btn-primary btn-sm">賣出</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="stock_num_4"">4</td>
+                    <td id="stock_label_4"">DMD</td>
+                    <td id="stock_price_4"></td>
+                    <td>
+                        <input type="number" style="width:35%">
+                        <button id="buy_4" class="btn btn-primary btn-sm" style="margin-left:2%;margin-right: 2%;">購買</button>
+                        <button id="sell_4" class="btn btn-primary btn-sm">賣出</button>
+                    </td>
+                </tr>
+            </table>
+            <p id="error-checking">最後更新時間: </p>
+            <button onclick="setTime()">設定時間</button>
+    </div>
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
 
@@ -23,6 +69,7 @@
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
         <script src = "https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js" ></script> 
+        <script type='text/javascript' src='config.js'></script>
         <script src="JS/gameOne.js"></script>
         
         <!-- jQuery library -->

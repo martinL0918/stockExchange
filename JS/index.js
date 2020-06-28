@@ -41,4 +41,9 @@ document.getElementById("submit").addEventListener('click', () =>{
     })
 })
 
+function lightTheme(){
+    document.getElementsByTagName("BODY")[0].style.backgroundColor = "white";
+    document.getElementsByTagName("BODY")[0].style.color = "black";
+}
+
  
