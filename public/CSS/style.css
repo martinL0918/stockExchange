@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
-
 body{
     font-family: ‘Noto Sans TC’, sans-serif;
     background-color: #121212;
@@ -38,6 +36,9 @@ body{
     width: 30%;
 }
 
+#login{
+    
+}
 
 .acc-vertical{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -47,6 +48,6 @@ body{
     height: auto;
     font-size: 85px;
     background: -webkit-linear-gradient(#2c4ad1,#a1d3f5);
-    
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
