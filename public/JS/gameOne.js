@@ -47,14 +47,24 @@ function changePrice(){
     console.log(oldTime)
     var seconds = (currentTime.getTime() - oldTime) / 1000
     console.log("Time difference: " + seconds)
+    var luck = math.random * (1 - 0 )+ 0
+    console.log(luck)
     if (seconds >= 5-0.05){
-      ref.update({
-          lastUpdate : currentTime.getTime(),
-          ABCD: (first_price * (1+ Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2),
-          EFGH: (second_price * (1+ Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2),
-          HATE: (third_price * (1+ Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2),
-          DMD: (forth_price * (1+ Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2)
-          }) 
+      if (luck ==0){
+        ref.update({
+            lastUpdate : currentTime.getTime(),
+            ABCD: (first_price * (1+ Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2),
+            EFGH: (second_price * (1+ Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2),
+            HATE: (third_price * (1+ Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2),
+            DMD: (forth_price * (1+ Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2)
+            }) 
+      }else if (luck == 1){
+        lastUpdate : currentTime.getTime(),
+        ABCD: (first_price * (1- Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2),
+        EFGH: (second_price * (1- Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2),
+        HATE: (third_price * (1- Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2),
+        DMD: (forth_price * (1- Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2)
+      }
       repaint()
 
     }

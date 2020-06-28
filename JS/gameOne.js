@@ -47,21 +47,35 @@ function changePrice(){
     console.log(oldTime)
     var seconds = (currentTime.getTime() - oldTime) / 1000
     console.log("Time difference: " + seconds)
+    var stock = [first_price,second_price,third_price,forth_price]
+    console.log(stock)
+    for (var i=0;i<4;i++){
+      var luck = Math.round(Math.random())
+      if (luck ==0){
+        //stock[i] = 1000;
+        stock[i]  = (stock[i] * (1+ (Math.random() * (0.03 - 0.01) + 0.01))).toFixed(2);
+        console.log(i + ":   " + stock[i])
+      }
+      else if (luck == 1){
+        stock[i]  = (stock[i] * (1 - (Math.random() * (0.04 - 0.02) + 0.02))).toFixed(2);
+        console.log(i + ":   " + stock[i])
+      }
+    } 
+    first_price = stock[0];
+    second_price = stock[1];
+    third_price = stock[2];
+    forth_price = stock[3];
+ 
     if (seconds >= 5-0.05){
-      ref.update({
-          lastUpdate : currentTime.getTime(),
-          ABCD: (first_price * (1+ Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2),
-          EFGH: (second_price * (1+ Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2),
-          HATE: (third_price * (1+ Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2),
-          DMD: (forth_price * (1+ Math.random() * (0.03 - 0.01) + 0.01)).toFixed(2)
-          }) 
-      repaint()
-
-    }
-    else{
-      console.log("Not yet")
-    }
+        ref.update({
+            lastUpdate : currentTime.getTime(),
+            ABCD: stock[0],
+            EFGH: stock[1],
+            HATE: stock[2],
+            DMD : stock[3]
+            })    
   }
+}
 
 
 
@@ -96,4 +110,4 @@ function changePrice(){
 
   setInterval(function(){
       updateRegularly()
-  },5000)
+  },10000)
