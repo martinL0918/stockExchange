@@ -11,8 +11,6 @@
        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
       <div class = "container">
             <h1><b>交易所</b></h1>
-            <button onclick="lightTheme()" class="btn btn-light">light Theme</button>
-            <button onclick="darkTheme()" class="btn btn-dark">dark Theme</button>
             <p id="name_field" class="float-left">undefined:</p>
             <p class="label label-default float-right">你現擁有資產: <span class="label label-default" id = "asset">未能讀取</span></p>
    
@@ -25,8 +23,8 @@
                     <td style="width:45%">操作</td>
                 </tr>
                 <tr>
-                    <td id="stock_num_1"">1</td>
-                    <td id="stock_label_1"">ABCD</td>
+                    <td id="stock_num_1"">CBY</td>
+                    <td id="stock_label_1"">龐克科技</td>
                     <td id="stock_price_1"</td>
                     <td id="stock_holding_1">-1</td>
                     <td>
@@ -36,8 +34,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td id="stock_num_2"">2</td>
-                    <td id="stock_label_2"">EFGH</td>
+                    <td id="stock_num_2"">EFS</td>
+                    <td id="stock_label_2"">伊利莎白飛行船有限公司</td>
                     <td id="stock_price_2"></td>
                     <td id="stock_holding_2">-1</td>
                     <td>
@@ -47,8 +45,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td id="stock_num_3"">3</td>
-                    <td id="stock_label_3"">HATE</td>
+                    <td id="stock_num_3"">SFL</td>
+                    <td id="stock_label_3"">星空食物研究所</td>
                     <td id="stock_price_3"></td>
                     <td id="stock_holding_3">-1</td>
                     <td>
@@ -58,8 +56,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td id="stock_num_4" >4</td>
-                    <td id="stock_label_4"">DMD</td>
+                    <td id="stock_num_4" >DME</td>
+                    <td id="stock_label_4"">數位音元娛樂集團</td>
                     <td id="stock_price_4"></td>
                     <td id="stock_holding_4">-1</td>
                     <td>
@@ -69,6 +67,8 @@
                     </td>
                 </tr>
             </table>
+            <button onclick="lightTheme()" class="btn btn-light">light Theme</button>
+            <button onclick="darkTheme()" class="btn btn-dark">dark Theme</button>
     </div>
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
