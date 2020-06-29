@@ -13,7 +13,7 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   const database = firebase.database();
   
-document.getElementById("login").addEventListener('click', () => {
+document.getElementById("login-btn").addEventListener('click', () => {
     let user = {
         email: email.value,
         pwd: pwd.value,

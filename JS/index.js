@@ -38,7 +38,7 @@ document.getElementById("submit").addEventListener('click', () =>{
             displayName: user.name
         })
         console.log(user.name)
-        location.replace("login.html")
+        location.replace("gameMode.html")
     }).catch (function failure(error){
         var errorCode = error.code;
         var errorMessage = error.message;
