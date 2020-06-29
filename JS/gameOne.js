@@ -58,19 +58,18 @@ function repaint(){
 
 function changePrice(){
     var currentTime = new Date();
+    console.log("currentTime: " + currentTime.getTime())
     var oldTime
     ref.on("value", function(snapshot){
       oldTime = snapshot.val().lastUpdate
     })
-    console.log(oldTime)
     var seconds = (currentTime.getTime() - oldTime) / 1000
     console.log("Time difference: " + seconds)
-    var stock = [first_price,second_price,third_price,forth_price,fifth_price]
+    var stock = [first_price,second_price,third_price,forth_price,fifth_price] 
     console.log(stock)
-    if (seconds >= 7200 - 10){
+    if (seconds >= 7200 - 20){
       for (var i=0;i<5;i++){
         var luck = Math.round(Math.random() * ( 2 - 0 )+ 0)
-        console.log(luck)
         if (luck ==0 || luck == 2){
           //stock[i] = 1000;
           stock[i]  = (stock[i] * (1+ (Math.random() * (0.03 - 0.01) + 0.01))).toFixed(2);
@@ -86,18 +85,20 @@ function changePrice(){
       third_price = stock[2];
       forth_price = stock[3];
       fifth_price = stock[4];
+      var after = oldTime + 7200000
+      var f = new Date();
+      f.setTime(after)
+      console.log(f)
+      console.log("After: " + after)
+      ref.update({
+        CBY : first_price,
+        DME : second_price,
+        EFS : third_price,
+        EPC : forth_price,
+        SFL : fifth_price,
+        lastUpdate : after
+      })    
     }
-    if (seconds >= 7200-10){ //7200-10
-            var after = oldTime + 7200 
-        ref.update({
-            lastUpdate : after,
-            CBY: stock[0],
-            EFS: stock[1],
-            SFL: stock[2],
-            DME : stock[3],
-            EPC : stock[4]
-            })    
-  }
 }
 
 
