@@ -16,7 +16,7 @@ var firebaseConfig = {
   document.getElementById("logout").addEventListener('click', () => {
     firebase.auth().signOut().then(function() {
       alert("你登出了")
-      location.replace("login.html")
+      location.replace("index.html")
     })
   })
   function redirect(){
@@ -32,7 +32,9 @@ var firebaseConfig = {
       var isAnonymous = user.isAnonymous;
       var uid = user.uid;
       var providerData = user.providerData;
+      var displayName = user.displayName
       document.getElementById("remind-message").innerHTML = "歡迎回來! " + user.displayName
+      console.log(displayName)
       // ...
     } else {
         document.getElementById("remind-message").innerHTML = "請先登入遊戲" ;
