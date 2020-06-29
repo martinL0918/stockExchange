@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="CSS/dark.css">
     </head>
     <body>
+        <div class="content-wrap">
         <!-- H1 Title -->
         <h1 class="acc-title">股票交易市埸 | Stock Overflow</h1>
 
@@ -24,7 +25,7 @@
 
         
         <!-- Register Tab Content-->
-        <div id="login" class="tab-pane fade active">
+        <div id="login" class="tab-pane fade in active">
             <div class= "acc-manager col-md-10">
                 <input id="email-login" type="text" class="form-control" placeholder="帳號">
             </div>
@@ -37,13 +38,13 @@
         <!-- Login Tab Content-->
         <div id="register" class="tab-pane fade">
         <div class="acc-manager col-lg-12">
-            <input id="email-register" class="form-control" placeholder="帳號">
+            <input id="email-register" type="text" class="form-control" placeholder="帳號">
         </div>
         <div class="acc-manager col-lg-12">
-            <input id="pwd-register" class="form-control" placeholder="密碼">
+            <input id="pwd-register" type="password" class="form-control" placeholder="密碼">
         </div>
         <div class="acc-manager col-lg-12">
-            <input id="nickname-register" class="form-control" placeholder="暱稱">
+            <input id="nickname-register" type="text" class="form-control" placeholder="暱稱">
         </div>
         <div class="acc-manager col-lg-12">
             <button onclick="" id="submit" type="button" class="btn btn-outline-secondary btn-round">創帳號</button>
@@ -53,6 +54,15 @@
 
         </div>
         </div>
+        <!-- End of content wrap-->
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <h6>Created by Martin Leung & Donald Tsang (2020)</h6>
+            <p>Github: martinL0918/stockExchange</p>
+        </footer>
+
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
@@ -65,6 +75,7 @@
         <script src = "https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js" ></script>
         <script type='text/javascript' src='config.js'></script> 
         <script src="JS/index.js"></script>
+        <script src="JS/login.js"></script>
         
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

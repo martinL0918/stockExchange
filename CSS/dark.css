@@ -33,7 +33,6 @@ body{
 
 .form-control{
     background-color: rgba(0,0,0,0.6);
-    stroke: aqua;
     width: 80%;
     border-top: 0;
     border-left: 0;
@@ -43,4 +42,10 @@ body{
 
 .btn-round{
     border-radius: 15px;
+}
+
+footer{
+    border-top: 3px solid #ebebeb;
+    position: ;
+    font-size: 2px;
 }
