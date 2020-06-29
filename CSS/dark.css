@@ -74,7 +74,7 @@ footer{
     color: #ebebeb;
     font-size: larger;
     justify-content: center;
-    margin: 100px;
+    margin: 120px;
 }
 
 .tab-link:hover{
@@ -84,4 +84,17 @@ footer{
 
 .tab-link:active{
     background-color: #ebebeb;
+}
+
+.btn-gm{
+    width: 300px;
+    height: 300px;
+    font-size: larger;
+    font-weight: 400;
+    margin: 100px;
+}
+
+.remind-message{
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
