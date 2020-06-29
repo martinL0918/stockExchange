@@ -3,23 +3,68 @@
         <title>股票交易市埸 | Register</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="CSS/style.css">
+        <link rel="stylesheet" href="CSS/light.css">
+        <link rel="stylesheet" href="CSS/dark.css">
     </head>
     <body>
-        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+        <div class="content-wrap">
+        <!-- H1 Title -->
         <h1 class="acc-title">股票交易市埸 | Stock Overflow</h1>
-        <br>
-        <div class="acc-div col-md-12">
-        <h4 class="acc-vertical col-md-2">REGISTER</h4>
-        <div class="acc-manager col-md-10">
-        <input id="email" placeholder="帳號"><br></div>
-        <div class="acc-manager col-md-10">
-        <input id="pwd" placeholder="密碼"></div>
-        <div class="acc-manager col-md-10">
-        <input id="nickname" placeholder="暱稱"><br></div>
-        <div class="acc-manager col-md-10">
-        <button onclick="" id="submit" type="button" class="btn btn-outline-secondary">創帳號</button>
-        </div></div>
+
+        <div class="acc-div">
+
+        <!-- Centered Tabs for sign up and register-->
+           
+
+        <ul class="nav nav-tabs" id="tab-bar">
+            <li class="active"><a href="#login" data-toggle="tab" >Login |  </a></li>
+            <li><a href="#register" data-toggle="tab">Register</a></li>
+        </ul>
+        
+
+        <div class="tab-content">
+
+        
+        <!-- login Tab Content-->
+        <div id="login" class="tab-pane fade in active">
+            <div class= "acc-manager col-md-12">
+                <input id="email-login" type="text" class="form-control" placeholder="帳號">
+            </div>
+            <div class="acc-manager col-md-12">
+                <input id="pwd-login" type="password" class="form-control" placeholder="密碼">
+            </div>
+                <button id="login-btn" type="button" class="btn btn-outline-secondary btn-round">登入</button>
+        </div>    
+
+        <!-- Register Tab Content-->
+        <div id="register" class="tab-pane fade">
+        <div class="acc-manager col-lg-12">
+            <input id="email-register" type="text" class="form-control" placeholder="帳號">
+        </div>
+        <div class="acc-manager col-lg-12">
+            <input id="pwd-register" type="password" class="form-control" placeholder="密碼">
+        </div>
+        <div class="acc-manager col-lg-12">
+            <input id="nickname-register" type="text" class="form-control" placeholder="暱稱">
+        </div>
+        <div class="acc-manager col-lg-12">
+            <button onclick="" id="submit" type="button" class="btn btn-outline-secondary btn-round">創帳號</button>
+        </div>
+        </div>
+
+
+        </div>
+        </div>
+        <!-- End of content wrap-->
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="border-line"></div>
+            <h6>Created by Martin Leung & Donald Tsang (2020)</h6>
+            <p>Github: martinL0918/stockExchange</p>
+        </footer>
+
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 

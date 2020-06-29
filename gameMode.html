@@ -10,10 +10,28 @@
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-        <p id= "remind-message">Ya</p>
+        <p id= "remind-message">你沒有登入</p>
+        <p id= "remind-message">請選擇遊戲模式</p>
         <button id="logout">登出</button><br>
-        <button onclick="redirect()""> 模式1</button>
-        <button disabled> 模式2</button>
+        <div class = "container-fluid">
+            <div class = "row">
+                <div class="card col-md m-4">
+                    <div class = "card-body">
+                        <button onclick="redirect()" class="btn btn-primary"> FIVEM</button>
+                    </div>
+                </div>
+                <div class="card  col-md m-4">
+                    <div class="card-body">
+                        <button  class="btn btn-dark" disabled> 虛擬股市</button>
+                    </div>
+                </div>
+                <div class="card  col-md m-4">
+                    <div class = "card-body">
+                        <button  class="btn btn-dark" disabled> 實時股市</button>
+                    </div>
+                </div>
+        </div>
+        </div>
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
 

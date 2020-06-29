@@ -62,25 +62,26 @@ function changePrice(){
     console.log("Time difference: " + seconds)
     var stock = [first_price,second_price,third_price,forth_price]
     console.log(stock)
-    for (var i=0;i<4;i++){
-      var luck = Math.round(Math.random() * ( 2 - 0 )+ 0)
-      console.log(luck)
-      if (luck ==0 || luck == 2){
-        //stock[i] = 1000;
-        stock[i]  = (stock[i] * (1+ (Math.random() * (0.03 - 0.01) + 0.01))).toFixed(2);
-        console.log(i + ":   " + stock[i])
-      }
-      else if (luck == 1){
-        stock[i]  = (stock[i] * (1 - (Math.random() * (0.04 - 0.02) + 0.02))).toFixed(2);
-        console.log(i + ":   " + stock[i])
-      }
-    } 
-    first_price = stock[0];
-    second_price = stock[1];
-    third_price = stock[2];
-    forth_price = stock[3];
- 
-    if (seconds >= 5-0.05){
+    if (seconds >= 7200-10){
+      for (var i=0;i<4;i++){
+        var luck = Math.round(Math.random() * ( 2 - 0 )+ 0)
+        console.log(luck)
+        if (luck ==0 || luck == 2){
+          //stock[i] = 1000;
+          stock[i]  = (stock[i] * (1+ (Math.random() * (0.03 - 0.01) + 0.01))).toFixed(2);
+          console.log(i + ":   " + stock[i])
+        }
+        else if (luck == 1){
+          stock[i]  = (stock[i] * (1 - (Math.random() * (0.04 - 0.02) + 0.02))).toFixed(2);
+          console.log(i + ":   " + stock[i])
+        }
+      } 
+      first_price = stock[0];
+      second_price = stock[1];
+      third_price = stock[2];
+      forth_price = stock[3];
+    }
+    if (seconds >= 7200-10){
         ref.update({
             lastUpdate : currentTime.getTime(),
             CBY: stock[0],
@@ -136,7 +137,7 @@ function changePrice(){
 
   setInterval(function(){
       updateRegularly()
-  },10000)
+  },7200000)
 
   function lightTheme(){
     document.getElementsByTagName("BODY")[0].style.backgroundColor = "white";

@@ -27,14 +27,35 @@ document.getElementById("submit").addEventListener('click', () =>{
     console.log
     firebase.auth().createUserWithEmailAndPassword(user.email, user.pwd).then( function success(userData){
         var uid = userData.user.uid
-        database.ref("/players/" + uid).set({money:5000000,
-                               email: user.email,
-                               name: user.name,
+        database.ref("/players/"+uid).set({
+            email: user.email,
+            name: user.name,
+        })
+        database.ref("/players/" + uid + "/mode1/").set({
+                               money:5000000,
                                hold_1: 0,
                                hold_2: 0,
                                hold_3: 0,
                                hold_4: 0,
+                               hold_5: 0,
                             });
+        database.ref("/players/" + uid + "/mode2/").set({
+            money:5000000,
+            hold_1: 0,
+            hold_2: 0,
+            hold_3: 0,
+            hold_4: 0,
+            hold_5: 0,
+        });
+        database.ref("/players/" + uid + "/mode3/").set({
+            money:5000000,
+            hold_1: 0,
+            hold_2: 0,
+            hold_3: 0,
+            hold_4: 0,
+            hold_5: 0,
+        });
+        
         userData.user.updateProfile({
             displayName: user.name
         }).then (function(){
