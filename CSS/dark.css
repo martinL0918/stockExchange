@@ -67,16 +67,21 @@ footer{
 #tab-bar{
     color: white;
     justify-content: center;
+    padding: -3px;
 }
 
 .tab-link{
     color: #ebebeb;
     font-size: larger;
     justify-content: center;
-    padding-left: -100px;
+    margin: 100px;
 }
 
 .tab-link:hover{
     color: #83b4e2;
     text-decoration: none;
+}
+
+.tab-link:active{
+    background-color: #ebebeb;
 }
