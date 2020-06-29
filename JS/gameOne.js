@@ -88,8 +88,9 @@ function changePrice(){
       fifth_price = stock[4];
     }
     if (seconds >= 7200-10){ //7200-10
+            var after = oldTime + 7200 
         ref.update({
-            lastUpdate : currentTime.getTime(),
+            lastUpdate : after,
             CBY: stock[0],
             EFS: stock[1],
             SFL: stock[2],
