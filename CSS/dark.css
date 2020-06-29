@@ -66,4 +66,12 @@ footer{
 
 #tab-bar{
     color: white;
+    justify-content: center;
+}
+
+.tab-link{
+    color: #ebebeb;
+    font-size: larger;
+    justify-content: center;
+    padding-left: -100px;
 }
