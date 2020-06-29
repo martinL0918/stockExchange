@@ -14,22 +14,23 @@
         <div class="acc-div">
 
         <!-- Centered Tabs for sign up and register-->
-        <div class="container">    
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
+           
+
+        <ul class="nav nav-tabs" id="tab-bar">
+            <li class="active"><a href="#login" data-toggle="tab" >Login</a></li>
             <li><a href="#register" data-toggle="tab">Register</a></li>
         </ul>
-        </div>
+        
 
         <div class="tab-content">
 
         
         <!-- Register Tab Content-->
         <div id="login" class="tab-pane fade in active">
-            <div class= "acc-manager col-md-10">
+            <div class= "acc-manager col-md-12">
                 <input id="email-login" type="text" class="form-control" placeholder="帳號">
             </div>
-            <div class="acc-manager col-md-10">
+            <div class="acc-manager col-md-12">
                 <input id="pwd-login" type="password" class="form-control" placeholder="密碼">
             </div>
                 <button id="login-btn" type="button" class="btn btn-outline-secondary btn-round">登入</button>
@@ -59,6 +60,7 @@
 
         <!-- Footer -->
         <footer>
+            <div class="border-line"></div>
             <h6>Created by Martin Leung & Donald Tsang (2020)</h6>
             <p>Github: martinL0918/stockExchange</p>
         </footer>
