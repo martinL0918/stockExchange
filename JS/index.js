@@ -16,13 +16,31 @@ function redirect(){
     // For testing
     location.replace("gameMode.html");
 }
+
+function CheckPassword(inputtxt) 
+        { 
+        var passw=  /^[A-Za-z]\w{7,14}$/;
+        if(inputtxt.value.match(passw)) 
+        { 
+        return true;
+        }
+        else
+        { 
+        alert('Password must contain 7-14 characters and no invalid sign.')
+        return false;
+        }
+        }
+
 //Register 註冊功能
 document.getElementById("submit").addEventListener('click', () =>{
+    //Check if the password is valid
+    if(CheckPassword(document.getElementById("pwd-register").value) == true){
     let user = {
         email: document.getElementById("email-register").value,
         pwd: document.getElementById("pwd-register").value,
         name: document.getElementById("nickname-register").value
     }
+    
     var nickName = user.name
     console.log
     firebase.auth().createUserWithEmailAndPassword(user.email, user.pwd).then( function success(userData){
@@ -68,7 +86,9 @@ document.getElementById("submit").addEventListener('click', () =>{
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode + " " + errorMessage);
-    })
+    })}else{
+        
+    }
 })
 // Login 登入功能
 document.getElementById("login-btn").addEventListener('click', () => {
