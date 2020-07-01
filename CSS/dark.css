@@ -98,3 +98,9 @@ footer{
 .remind-message{
     margin-top: 10px;
 }
+
+.nav-title{
+    font-weight: 400;
+    color: white;
+    margin-right: 30px;
+}
