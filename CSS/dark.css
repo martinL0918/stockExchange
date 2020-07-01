@@ -68,14 +68,14 @@ footer{
 #tab-bar{
     color: white;
     justify-content: center;
-    padding: -3px;
+    padding: 5px;
 }
 
 .tab-link{
     color: #ebebeb;
     font-size: larger;
     justify-content: center;
-    margin: 120px;
+    margin: 60px;
 }
 
 .tab-link:hover{
