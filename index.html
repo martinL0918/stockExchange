@@ -1,65 +1,54 @@
 <html>
     <head>
-        <title>股票交易市埸 | Register</title>
+    
+    <title>股票交易市埸 | Stock Overflow</title>
 
-        <!-- Add Icon-->
-        <link rel="icon" href="pic/1x/ICON.png" type="image/x-icon">
+    <!-- Add Icon-->
+    <link rel="icon" href="pic/1x/ICON.png" type="image/x-icon">
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="CSS/light.css">
-        <link rel="stylesheet" href="CSS/dark.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="CSS/light.css">
+    <link rel="stylesheet" href="CSS/dark.css">
+    
+    
     </head>
     <body>
         <div class="content-wrap">
-        <!-- H1 Title -->
-        <h1 class="acc-title">股票交易市埸 | Stock Overflow</h1>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <span class="navbar-text nav-title">股票交易市埸 | Stock Overflow</span>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">股市新聞</a>
+                </li>
+                <li class=""nav-item>
+                    <a class="nav-link" href="#">社群</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop"
+                    data-toggle="dropdown">
+                    <i class="fas fa-language"></i>語言</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">中文</a>
+                        <a class="dropdown-item" href="#">English</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        <i class="far fa-user-circle"></i>登入/創帳號</a>
+                </li>
+            </ul>
+          </nav>
 
-        <div class="acc-div">
+            <div id="div1"></div>
 
-        <!-- Centered Tabs for sign up and register-->
-           
-        <div class="container-fluid">
-        <ul class="nav nav-tabs" id="tab-bar">
-            <li class="active"><a href="#login" data-toggle="tab" class="tab-link col-6">Login</a></li>
-            <li> | </li>
-            <li><a href="#register" data-toggle="tab" class="tab-link col-6">Register</a></li>
-        </ul>
-        </div>
-
-        <div class="tab-content">
-
-        
-        <!-- login Tab Content-->
-        <div id="login" class="tab-pane active">
-            <div class= "acc-manager col-md-12">
-                <input id="email-login" type="text" class="form-control" placeholder="帳號">
+            <div class="container-fluid" style="background-color: white; height: 400px;">
+                    <h1 style="color: black;">Testing Text</h1>
             </div>
-            <div class="acc-manager col-md-12">
-                <input id="pwd-login" type="password" class="form-control" placeholder="密碼">
-            </div>
-                <button id="login-btn" type="button" class="btn btn-outline-secondary btn-round">登入</button>
-        </div>    
 
-        <!-- Register Tab Content-->
-        <div id="register" class="tab-pane fade">
-        <div class="acc-manager col-lg-12">
-            <input id="email-register" type="text" class="form-control" placeholder="帳號">
-        </div>
-        <div class="acc-manager col-lg-12">
-            <input id="pwd-register" type="password" class="form-control" placeholder="密碼">
-        </div>
-        <div class="acc-manager col-lg-12">
-            <input id="nickname-register" type="text" class="form-control" placeholder="暱稱">
-        </div>
-        <div class="acc-manager col-lg-12">
-            <button onclick="" id="submit" type="button" class="btn btn-outline-secondary btn-round">創帳號</button>
-        </div>
-        </div>
-
-
-        </div>
-        </div>
+          
         <!-- End of content wrap-->
         </div>
 
@@ -70,7 +59,7 @@
             <p>Github: martinL0918/stockExchange</p>
         </footer>
 
-        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+          <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -81,7 +70,6 @@
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
         <script src = "https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js" ></script>
         <script type='text/javascript' src='config.js'></script> 
-        <script src="JS/index.js"></script>
         
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -92,9 +80,16 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
+        <!-- Load an icon library -->
+        <script src="https://kit.fontawesome.com/1cbe56a0fa.js" crossorigin="anonymous"></script>
+
         <!-- 載入 React。 -->
         <!-- 注意：在發佈應用程式前，請把「development.js」替換成「production.min.js」。 -->
         <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-            </body>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+        <!-- Our js -->
+        <script type="text/babel" src="JS/homeRender.js"></script>
+    </body>
 </html>
