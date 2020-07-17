@@ -23,6 +23,10 @@ var firebaseConfig = {
     // For testing
     location.replace("gameOne.html");
  }
+  function redirectTwo(){
+    // For testing
+    location.replace("gameTwo.html");
+ }
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.

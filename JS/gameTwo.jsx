@@ -4,11 +4,36 @@
                     <th style="width:15%">持股數</th>
                     <th style="width:45%">操作</th>
 */
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: config.apiKey,
+  authDomain:  config.authDomain,
+  databaseURL:  config.databaseURL,
+  projectId:  config.projectId,
+  storageBucket:  config.storageBucket,
+  messagingSenderId:  config.messagingSenderId,
+  appId: config.appId,
+  measurementId:  config.measurementId,
+};
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+  var user_id;
 
 
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    user_id = user.uid;
+    var providerData = user.providerData;
+    console.log("Welcome "+ user.name)  // ...
+  } else {
+    alert("請先登入")
+  }
+});
 class StockRow extends React.Component{
     render(){
-
         /*playerName.forEach((name,index)=>{
             console.log(name,playerData[index])
         })*/
@@ -16,7 +41,7 @@ class StockRow extends React.Component{
             <tr>
                 <td>{this.props.name}</td>
                 <td>{this.props.price}</td>
-                <td>{this.props.price}</td>
+                <td>{this.props.playerData}</td>
             </tr>
         );
     }
@@ -25,23 +50,39 @@ class StockRow extends React.Component{
         var playerName =this.props.playerData
         var playerData = Object.values(this.props.playerData)*/
 class StockTable extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {uid : "Error",
+                  holdings : ["Loading","Loading","Loading","Loading","Loading"]};
+  }
+    componentDidMount(){
+      setTimeout(
+        () => this.tick(),
+        2000
+      );
+    }
+    tick(){
+      var tempArray = eval(`this.props.playerData.${user_id}.mode2`);
+      this.setState({uid : user_id});
+      this.setState({holdings: tempArray})
+    }
     render(){
         const row = [];
         var name = Object.keys(this.props.stockMarket)
         var price = Object.values(this.props.stockMarket)
+        var holdings = Object.values(this.state.holdings)
         name.forEach((share,index)=> {
                 row.push(
-                    <StockRow name = {share} price = {price[index]} key ={share} playerData = {this.props.playerData[index]}/>
+                    <StockRow name = {share} price = {price[index]} key ={share} uid = {this.state.uid} playerData = {holdings[index]}/>
                 );
             })
-        console.log(this.props.playerData)
         return (
             <table className={"table table-light table-striped"}>
             <thead>
               <tr>
                 <th>股票編號</th>
                 <th>股票價格</th>
-                <th>股票價格</th>
+                <th>持股量</th>
               </tr>
             </thead>
             <tbody>
@@ -50,9 +91,10 @@ class StockTable extends React.Component{
             </table>
         );
     }
+
 }
 
-const database = [
+const testDatabase = [
     {
   "stocks" : {
       "CBY" : "1139.16",
@@ -165,7 +207,7 @@ const playerData = [
           "mode2" : {
             "hold_1" : 0,
             "hold_2" : 0,
-            "hold_3" : 0,
+            "hold_3" : 100,
             "hold_4" : 0,
             "hold_5" : 0,
             "money" : 5000000
@@ -184,12 +226,10 @@ const playerData = [
     }
 ]
 ReactDOM.render(
-    <StockTable stockMarket={database[0].stocks} playerData={playerData[0].players} />,
+    <StockTable stockMarket={testDatabase[0].stocks} playerData={playerData[0].players}/>,
     document.getElementById('stockTable')
   );
-var test = Object.entries(playerData[0].players);
-const map1 = test.map(x => x[0])
-console.log(map1)
+var test = Object.values(playerData[0].players.lnUEYL7LL2auR6KyvCfxCyy85P73.mode2);
 /*  database[0].stocks.forEach((share)=> {
     console.log(share)
 })*/
