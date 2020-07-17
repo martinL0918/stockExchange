@@ -33,19 +33,6 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 class StockRow extends React.Component{
-    constructor(props){
-      super(props)
-      this.state = {uid : "Loading"}
-    }
-    componentDidMount(){
-      setTimeout(
-        () => this.tick(),
-        2000
-      );
-    }
-    tick(){
-      this.setState({uid : this.props.uid});
-    }
     render(){
         /*playerName.forEach((name,index)=>{
             console.log(name,playerData[index])
@@ -78,7 +65,6 @@ class StockTable extends React.Component{
       var tempArray = eval(`this.props.playerData.${user_id}.mode2`);
       this.setState({uid : user_id});
       this.setState({holdings: tempArray})
-      console.log(this.state.uid)
     }
     render(){
         const row = [];
