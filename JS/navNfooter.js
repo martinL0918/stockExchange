@@ -1,5 +1,3 @@
-'use strict';
-
 const footer = (
     <div>
         <footer>
