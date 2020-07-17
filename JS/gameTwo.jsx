@@ -35,7 +35,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 class StockRow extends React.Component{
     constructor(props){
       super(props)
-      this.state = {uid : "Error"}
+      this.state = {uid : "Loading"}
     }
     componentDidMount(){
       setTimeout(
@@ -65,24 +65,26 @@ class StockRow extends React.Component{
 class StockTable extends React.Component{
   constructor(props){
     super(props);
-    this.state = {uid : "Error"};
+    this.state = {uid : "Error",
+                  holdings : ["Loading","Loading","Loading","Loading","Loading"]};
   }
     componentDidMount(){
       setTimeout(
         () => this.tick(),
-        3000
+        2000
       );
     }
     tick(){
+      var tempArray = eval(`this.props.playerData.${user_id}.mode2`);
       this.setState({uid : user_id});
+      this.setState({holdings: tempArray})
       console.log(this.state.uid)
     }
     render(){
         const row = [];
         var name = Object.keys(this.props.stockMarket)
         var price = Object.values(this.props.stockMarket)
-        var temp = "this.props.playerData."+this.state.uid
-        var holdings = Object.values(this.props.playerData.lnUEYL7LL2auR6KyvCfxCyy85P73.mode2)
+        var holdings = Object.values(this.state.holdings)
         name.forEach((share,index)=> {
                 row.push(
                     <StockRow name = {share} price = {price[index]} key ={share} uid = {this.state.uid} playerData = {holdings[index]}/>
@@ -219,7 +221,7 @@ const playerData = [
           "mode2" : {
             "hold_1" : 0,
             "hold_2" : 0,
-            "hold_3" : 0,
+            "hold_3" : 100,
             "hold_4" : 0,
             "hold_5" : 0,
             "money" : 5000000
