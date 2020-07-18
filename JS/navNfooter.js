@@ -1,3 +1,6 @@
+import en from "../Locale/en/translate.json.json";
+import hk from "../Locale/zh-hk/translate.json";
+
 const footer = (
     <div>
         <footer>
