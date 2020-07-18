@@ -23,6 +23,9 @@ const nav = (
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
+                <input type="checkbox" checked data-toggle="toggle" data-style="ios">
+                    
+                </input>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop"
                     data-toggle="dropdown">
