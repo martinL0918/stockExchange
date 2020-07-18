@@ -5,15 +5,22 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="CSS/light.css">
         <link rel="stylesheet" href="CSS/dark.css">
+        <script>
+            function loadScreen(){
+            setTimeout(function(){
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("stockTable").style.display = "block";
+            },4000)
+            }
+        </script>
     </head>
 
-    <body>
-        <div class="content-wrap">
+    <body onload = "loadScreen()">
+        <div class = "loader" id="loader"></div>
+        <div class="content-wrap" >
             <h1><b>交易所</b></h1>
             <div class="container">
-            <p id="name_field" class="float-left">undefined:</p>
-            <p class="label label-default float-right">你現擁有資產: <span class="label label-default" id = "asset">未能讀取</span></p><br>
-            <div id= "stockTable">
+            <div id= "stockTable" style="display: none;">
             </div>
 
             </div>
