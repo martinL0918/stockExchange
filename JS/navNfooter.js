@@ -33,7 +33,7 @@ const nav = (
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="acc.html">
                         <i class="far fa-user-circle"></i>登入/創帳號</a>
                 </li>
             </ul>

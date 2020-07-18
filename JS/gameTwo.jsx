@@ -19,7 +19,7 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   const database = firebase.database();
   var user_id;
-
+  var nickName = "loading";
 
 
 firebase.auth().onAuthStateChanged(function(user) {
@@ -27,11 +27,42 @@ firebase.auth().onAuthStateChanged(function(user) {
     // User is signed in.
     user_id = user.uid;
     var providerData = user.providerData;
-    console.log("Welcome "+ user.name)  // ...
+    console.log("Welcome "+ user.name)  
+    //read nickName
+    firebase.database().ref("players/"+ user.uid).on("value", function(snapshot){
+      nickName = snapshot.val().name
+      }, function (error){
+        console.log("Error: "+error.code)
+      })// ...
   } else {
     alert("請先登入")
   }
 });
+class AssetRow extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {asset : "Loading"}
+  }
+  componentDidMount(){
+    setInterval(
+      () => this.tick()
+      ,2000);
+  }
+  tick(){
+    var money = "Loading"
+      firebase.database().ref("players/"+ user_id+"/mode2/").on("value", function(snapshot){
+        money = snapshot.val().money
+      }, function (error){
+        console.log("Error: "+error.code)
+      }) 
+      this.setState({asset : money})
+  }
+  render(){
+    return(
+      <span>{this.state.asset}</span>
+   );
+  }
+}
 class StockRow extends React.Component{
     render(){
         /*playerName.forEach((name,index)=>{
@@ -50,33 +81,58 @@ class StockRow extends React.Component{
         var playerName =this.props.playerData
         var playerData = Object.values(this.props.playerData)*/
 class StockTable extends React.Component{
+  
   constructor(props){
     super(props);
     this.state = {uid : "Error",
-                  holdings : ["Loading","Loading","Loading","Loading","Loading"]};
+                  holdings : ["Loading","Loading","Loading","Loading","Loading"],
+                  shareName :["Loading","Loading","Loading","Loading","Loading"],
+                  sharePrice : ["0","0","0","0","0"]};
+                  
   }
     componentDidMount(){
-      setTimeout(
+      setInterval(
         () => this.tick(),
         2000
       );
     }
     tick(){
-      var tempArray = eval(`this.props.playerData.${user_id}.mode2`);
+       var tempArray = ["Loading","Loading","Loading","Loading","Loading"] //玩家持股量
+       var stocKName = ["Loading","Loading","Loading","Loading","Loading"] //股票代號
+       var stockPrice = ["0","0","0","0","0"]
+       //玩家持股量
+       firebase.database().ref("players/"+ user_id+"/mode2/").on("value", function(snapshot){
+         tempArray = [snapshot.val().hold_1,snapshot.val().hold_2,snapshot.val().hold_3,snapshot.val().hold_4,snapshot.val().hold_5]
+       }, function (error){
+         console.log("Error: "+error.code)
+       })
+       //股票代號
+       firebase.database().ref("stocks/mode1/").on("value", function(snapshot){
+        stocKName = (Object.keys(snapshot.val())).map(x => x)
+        stockPrice = (Object.values(snapshot.val())).map(x => x)
+      }, function (error){
+        console.log("Error: "+error.code)
+      })
       this.setState({uid : user_id});
       this.setState({holdings: tempArray})
+      this.setState({shareName : stocKName})
+      this.setState({sharePrice : stockPrice})
     }
     render(){
         const row = [];
-        var name = Object.keys(this.props.stockMarket)
-        var price = Object.values(this.props.stockMarket)
+        var userAsset = [];
+        var userName = [];
         var holdings = Object.values(this.state.holdings)
-        name.forEach((share,index)=> {
+        for (var index=0;index<this.state.sharePrice.length - 1;index++){ //選擇顯示的股票數目
                 row.push(
-                    <StockRow name = {share} price = {price[index]} key ={share} uid = {this.state.uid} playerData = {holdings[index]}/>
+                    <StockRow name = {this.state.shareName[index]} price = {this.state.sharePrice[index]} key ={index} uid = {this.state.uid} playerData = {holdings[index]}/>
                 );
-            })
+            }
+        userAsset.push(<AssetRow key="1"/>)
         return (
+          <div>
+          <h5 className={"float-left"}>歡迎: {nickName}</h5>
+          <h5 className={"float-right"}>你現擁有資產: {userAsset}</h5>
             <table className={"table table-light table-striped"}>
             <thead>
               <tr>
@@ -89,147 +145,19 @@ class StockTable extends React.Component{
                 {row}
             </tbody>
             </table>
+          </div> 
         );
     }
 
 }
 
-const testDatabase = [
-    {
-  "stocks" : {
-      "CBY" : "1139.16",
-      "DME" : "497.27",
-      "EFS" : "1316.14",
-      "EPC" : "1361.03",
-      "SFL" : "589.05",
-      "lastUpdate" : 1593492854499
-    }
-  }
-];
+function redirect(){
+  setTimeout(function(){
+    document.getElementById("loader").style.display = "none";
+  },2000)
+}
 
-const playerData = [
-    {
-    "players" : {
-        "M3dqOFeDuZgOGYomaPvQcbTzyA22" : {
-          "email" : "donald@donald.com",
-          "mode1" : {
-            "hold_1" : 0,
-            "hold_2" : 0,
-            "hold_3" : 0,
-            "hold_4" : 0,
-            "hold_5" : 0,
-            "money" : 5000000
-          },
-          "mode2" : {
-            "hold_1" : 0,
-            "hold_2" : 0,
-            "hold_3" : 0,
-            "hold_4" : 0,
-            "hold_5" : 0,
-            "money" : 5000000
-          },
-          "mode3" : {
-            "hold_1" : 0,
-            "hold_2" : 0,
-            "hold_3" : 0,
-            "hold_4" : 0,
-            "hold_5" : 0,
-            "money" : 5000000
-          },
-          "name" : "donald"
-        },
-        "hNfKtPdUyzgkZMJMl0yvXCNAq572" : {
-          "email" : "Haha@gmail.com",
-          "mode1" : {
-            "hold_1" : 0,
-            "hold_2" : 0,
-            "hold_3" : 0,
-            "hold_4" : 0,
-            "hold_5" : 0,
-            "money" : 5000000
-          },
-          "mode2" : {
-            "hold_1" : 0,
-            "hold_2" : 0,
-            "hold_3" : 0,
-            "hold_4" : 0,
-            "hold_5" : 0,
-            "money" : 5000000
-          },
-          "mode3" : {
-            "hold_1" : 0,
-            "hold_2" : 0,
-            "hold_3" : 0,
-            "hold_4" : 0,
-            "hold_5" : 0,
-            "money" : 5000000
-          },
-          "name" : "BD"
-        },
-        "i79a7iKwU1XG6aNjkuDeki6puGT2" : {
-          "email" : "admin@admin.com",
-          "mode1" : {
-            "hold_1" : 2,
-            "hold_2" : 0,
-            "hold_3" : 0,
-            "hold_4" : 0,
-            "hold_5" : 0,
-            "money" : "4997445.64"
-          },
-          "mode2" : {
-            "hold_1" : 0,
-            "hold_2" : 0,
-            "hold_3" : 0,
-            "hold_4" : 0,
-            "hold_5" : 0,
-            "money" : 5000000
-          },
-          "mode3" : {
-            "hold_1" : 0,
-            "hold_2" : 0,
-            "hold_3" : 0,
-            "hold_4" : 0,
-            "hold_5" : 0,
-            "money" : 5000000
-          },
-          "name" : "Admin"
-        },
-        "lnUEYL7LL2auR6KyvCfxCyy85P73" : {
-          "email" : "martin@martin.com",
-          "mode1" : {
-            "hold_1" : 2014,
-            "hold_2" : 1500,
-            "hold_3" : 1000,
-            "hold_4" : 800,
-            "hold_5" : 1300,
-            "money" : "1760511.27"
-          },
-          "mode2" : {
-            "hold_1" : 0,
-            "hold_2" : 0,
-            "hold_3" : 100,
-            "hold_4" : 0,
-            "hold_5" : 0,
-            "money" : 5000000
-          },
-          "mode3" : {
-            "hold_1" : 0,
-            "hold_2" : 0,
-            "hold_3" : 0,
-            "hold_4" : 0,
-            "hold_5" : 0,
-            "money" : 5000000
-          },
-          "name" : "martin"
-        }
-      }
-    }
-]
 ReactDOM.render(
-    <StockTable stockMarket={testDatabase[0].stocks} playerData={playerData[0].players}/>,
+    <StockTable />,
     document.getElementById('stockTable')
   );
-var test = Object.values(playerData[0].players.lnUEYL7LL2auR6KyvCfxCyy85P73.mode2);
-/*  database[0].stocks.forEach((share)=> {
-    console.log(share)
-})*/

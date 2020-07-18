@@ -37,7 +37,7 @@ var firebaseConfig = {
       var uid = user.uid;
       var providerData = user.providerData;
       var displayName = user.displayName
-      document.getElementById("remind-message").innerHTML = "歡迎回來! " + user.displayName
+      document.getElementsByClassName("remind-message")[0].innerHTML = "歡迎回來! " + user.displayName
       console.log(displayName)
       // ...
     } else {
