@@ -102,7 +102,8 @@ class StockTable extends React.Component{
        var stockPrice = ["0","0","0","0","0"]
        //玩家持股量
        firebase.database().ref("players/"+ user_id+"/mode2/").on("value", function(snapshot){
-         tempArray = [snapshot.val().hold_1,snapshot.val().hold_2,snapshot.val().hold_3,snapshot.val().hold_4,snapshot.val().hold_5]
+         tempArray = (Object.values(snapshot.val())).map(x => x)
+         console.log(Object.keys(snapshot.val()))
        }, function (error){
          console.log("Error: "+error.code)
        })
@@ -123,6 +124,11 @@ class StockTable extends React.Component{
         var userAsset = [];
         var userName = [];
         var holdings = Object.values(this.state.holdings)
+        var sortedArray = []
+       /* sortedArray.push(Object.keys(this.state.holdings).find(function(item){
+            return item === "CBY"
+        }));*/
+      
         for (var index=0;index<this.state.sharePrice.length - 1;index++){ //選擇顯示的股票數目
                 row.push(
                     <StockRow name = {this.state.shareName[index]} price = {this.state.sharePrice[index]} key ={index} uid = {this.state.uid} playerData = {holdings[index]}/>
