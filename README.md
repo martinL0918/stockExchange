@@ -24,3 +24,8 @@ Ver 0.1.3 (16/7/2020)
 
 - Update README with no reasons
 
+Ver 0.1.4 (19/7/2020)
+
+- UI updates
+- Game 2 updates
+
