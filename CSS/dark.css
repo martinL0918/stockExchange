@@ -130,3 +130,6 @@ footer{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+  .toggle.ios .toggle-handle { border-radius: 20px; }

@@ -1,5 +1,5 @@
-import en from "../Locale/en/translate.json.json";
-import hk from "../Locale/zh-hk/translate.json";
+//import en from "../Locale/en/translate.json.json";
+//import hk from "../Locale/zh-hk/translate.json";
 
 const footer = (
     <div>
@@ -23,8 +23,8 @@ const nav = (
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <input type="checkbox" checked data-toggle="toggle" data-style="ios">
-                    
+                <input type="checkbox" checked data-toggle="toggle" data-style="ios"
+                data-on="Dark Mode" data-off="Light Mode"> 
                 </input>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop"
