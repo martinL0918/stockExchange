@@ -70,6 +70,7 @@ class StockRow extends React.Component{
         })*/
         return(
             <tr>
+                <td>{this.props.code}</td>
                 <td>{this.props.name}</td>
                 <td>{this.props.price}</td>
                 <td>{this.props.playerData}</td>
@@ -98,25 +99,28 @@ class StockTable extends React.Component{
     }
     tick(){
        var tempArray = ["Loading","Loading","Loading","Loading","Loading"] //玩家持股量
-       var stocKName = ["Loading","Loading","Loading","Loading","Loading"] //股票代號
+       var stockName = ["Loading","Loading","Loading","Loading","Loading"] //股票代號
        var stockPrice = ["0","0","0","0","0"]
        //玩家持股量
        firebase.database().ref("players/"+ user_id+"/mode2/").on("value", function(snapshot){
          tempArray = (Object.values(snapshot.val())).map(x => x)
-         console.log(Object.keys(snapshot.val()))
        }, function (error){
          console.log("Error: "+error.code)
        })
        //股票代號
-       firebase.database().ref("stocks/mode1/").on("value", function(snapshot){
-        stocKName = (Object.keys(snapshot.val())).map(x => x)
-        stockPrice = (Object.values(snapshot.val())).map(x => x)
+       firebase.database().ref("stocks/mode2").on("value", function(snapshot){
+        Object.values(snapshot.val()).forEach((element,index) => {
+          stockName[index] = Object.keys(element)
+        });
+        Object.values(snapshot.val()).forEach((element,index) => {
+          stockPrice[index] = Object.values(element)
+        });
       }, function (error){
         console.log("Error: "+error.code)
       })
       this.setState({uid : user_id});
       this.setState({holdings: tempArray})
-      this.setState({shareName : stocKName})
+      this.setState({shareName : stockName})
       this.setState({sharePrice : stockPrice})
     }
     render(){
@@ -124,14 +128,13 @@ class StockTable extends React.Component{
         var userAsset = [];
         var userName = [];
         var holdings = Object.values(this.state.holdings)
-        var sortedArray = []
-       /* sortedArray.push(Object.keys(this.state.holdings).find(function(item){
-            return item === "CBY"
-        }));*/
-      
-        for (var index=0;index<this.state.sharePrice.length - 1;index++){ //選擇顯示的股票數目
+        for (var index=0;index<=this.state.sharePrice.length - 1 ;index++){ //選擇顯示的股票數目
+          var str = "" + (index + 1)
+          var pad = "000"
+          var ans = pad.substring(0,pad.length - str.length) + str
+         // console.log('000'.substring(0))
                 row.push(
-                    <StockRow name = {this.state.shareName[index]} price = {this.state.sharePrice[index]} key ={index} uid = {this.state.uid} playerData = {holdings[index]}/>
+                    <StockRow name = {this.state.shareName[index]} price = {this.state.sharePrice[index]} key ={index} uid = {this.state.uid} playerData = {holdings[index]} code={ans}/>
                 );
             }
         userAsset.push(<AssetRow key="1"/>)
@@ -143,6 +146,7 @@ class StockTable extends React.Component{
             <thead>
               <tr>
                 <th>股票編號</th>
+                <th>股票代碼</th>
                 <th>股票價格</th>
                 <th>持股量</th>
               </tr>
