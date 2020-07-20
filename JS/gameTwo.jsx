@@ -27,7 +27,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     // User is signed in.
     user_id = user.uid;
     var providerData = user.providerData;
-    console.log("Welcome "+ user.name)  
     //read nickName
     firebase.database().ref("players/"+ user.uid).on("value", function(snapshot){
       nickName = snapshot.val().name
@@ -71,6 +70,7 @@ class StockRow extends React.Component{
         return(
             <tr>
                 <td>{this.props.code}</td>
+                <td>{this.props.AKA}</td>
                 <td>{this.props.name}</td>
                 <td>{this.props.price}</td>
                 <td>{this.props.playerData}</td>
@@ -86,10 +86,12 @@ class StockTable extends React.Component{
   constructor(props){
     super(props);
     this.state = {uid : "Error",
-                  holdings : ["Loading","Loading","Loading","Loading","Loading"],
-                  shareName :["Loading","Loading","Loading","Loading","Loading"],
-                  sharePrice : ["0","0","0","0","0"]};
-                  
+                  shareCode :["0"],
+                  shareAKA :["0"],
+                  shareName :["Loading"],
+                  sharePrice : ["0"],
+                  holdings : ["Loading"],};
+                   
   }
     componentDidMount(){
       setInterval(
@@ -98,30 +100,67 @@ class StockTable extends React.Component{
       );
     }
     tick(){
-       var tempArray = ["Loading","Loading","Loading","Loading","Loading"] //玩家持股量
-       var stockName = ["Loading","Loading","Loading","Loading","Loading"] //股票代號
-       var stockPrice = ["0","0","0","0","0"]
+
+       var stockAKA = ["Loading"] //股票編號
+       var stockName = ["Loading"] //股票代號
+       var stockPrice = ["0"]
+       var stockCode = ["0"]
+       var playerHoldings = ["Loading"] //玩家持股量
+       this.checkSQL() 
        //玩家持股量
        firebase.database().ref("players/"+ user_id+"/mode2/").on("value", function(snapshot){
-         tempArray = (Object.values(snapshot.val())).map(x => x)
+        playerHoldings = (Object.values(snapshot.val())).map(x => x)
        }, function (error){
          console.log("Error: "+error.code)
        })
-       //股票代號
+       //股票代碼
        firebase.database().ref("stocks/mode2").on("value", function(snapshot){
-        Object.values(snapshot.val()).forEach((element,index) => {
-          stockName[index] = Object.keys(element)
-        });
-        Object.values(snapshot.val()).forEach((element,index) => {
-          stockPrice[index] = Object.values(element)
-        });
-      }, function (error){
-        console.log("Error: "+error.code)
-      })
+        //股票編號
+           stockCode = Object.keys(snapshot.val())
+          Object.values(snapshot.val()).forEach((element,index) => {
+            stockAKA[index] = Object.keys(element)[0]
+          });
+          //股票名稱
+          Object.values(snapshot.val()).forEach((element,index) => {
+            stockName[index] = Object.values(element)[1]
+          });
+          Object.values(snapshot.val()).forEach((element,index) => {
+            stockPrice[index] = Object.values(element)[0]
+          });
+        }, function (error){
+          console.log("Error: "+error.code)
+        })
       this.setState({uid : user_id});
-      this.setState({holdings: tempArray})
+      this.setState({shareCode : stockCode})
+      this.setState({shareAKA : stockAKA})
       this.setState({shareName : stockName})
       this.setState({sharePrice : stockPrice})
+      this.setState({holdings: playerHoldings})
+    }
+    checkSQL(){
+      var sqlAmount = []
+      firebase.database().ref("players/"+ user_id+"/mode2/").on("value", function(snapshot){
+        sqlAmount = (Object.values(snapshot.val())).map(x => x)
+      }, function (error){
+      })
+      console.log("SQLAmount: "+ sqlAmount.length + " shareAKA: "+ this.state.shareAKA.length)
+      if (sqlAmount.length-1 <= this.state.shareAKA.length){
+        console.log("SQLamount: "+ sqlAmount.length + " shareAmount: " +this.state.shareAKA.length)
+        console.log("You need to update SQL first")
+        this.updateSQL(sqlAmount.length-1)
+      }
+    }
+     updateSQL(alength) {
+      // Get a key for a new Post.
+      var str = "" + (alength)
+      var pad = "000"
+      var ans = pad.substring(0,pad.length - str.length) + str
+      var postData = "0"
+      // Write the new post's data simultaneously in the posts list and the user's post list.
+      firebase.database().ref("players/"+ user_id+"/mode2/").update({
+          [ans] : postData
+      })
+      console.log("updated")
     }
     render(){
         const row = [];
@@ -129,12 +168,9 @@ class StockTable extends React.Component{
         var userName = [];
         var holdings = Object.values(this.state.holdings)
         for (var index=0;index<=this.state.sharePrice.length - 1 ;index++){ //選擇顯示的股票數目
-          var str = "" + (index + 1)
-          var pad = "000"
-          var ans = pad.substring(0,pad.length - str.length) + str
          // console.log('000'.substring(0))
                 row.push(
-                    <StockRow name = {this.state.shareName[index]} price = {this.state.sharePrice[index]} key ={index} uid = {this.state.uid} playerData = {holdings[index]} code={ans}/>
+                    <StockRow AKA = {this.state.shareAKA[index]} name = {this.state.shareName[index]} price = {this.state.sharePrice[index]} key ={index} uid = {this.state.uid} playerData = {holdings[index]} code={this.state.shareCode[index]}/>
                 );
             }
         userAsset.push(<AssetRow key="1"/>)
@@ -145,10 +181,11 @@ class StockTable extends React.Component{
             <table className={"table table-light table-striped"}>
             <thead>
               <tr>
-                <th>股票編號</th>
-                <th>股票代碼</th>
-                <th>股票價格</th>
-                <th>持股量</th>
+                  <th style={{width:"5%"}}>股票編號</th>
+                  <th style={{width:"5%"}}>股票代碼</th>
+                  <th style={{width:"25%"}}>股票名稱</th>
+                  <th style={{width:"10%"}}>股票價格</th>
+                  <th style={{width:"10%"}}>持股量</th>
               </tr>
             </thead>
             <tbody>

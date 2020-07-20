@@ -46,4 +46,4 @@ const nav = (
 );
 
 ReactDOM.render(footer, document.getElementById('footer'));
-ReactDOM.render(nav, document.getElementById('navb'));  //line 26 cause error, use default checked in react instead of checked
+ReactDOM.render(nav, document.getElementById('navb'));  //line 26 caused error, use defaultChecked in react instead of checked
