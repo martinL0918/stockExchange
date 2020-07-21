@@ -22,18 +22,10 @@ const nav = (
                     <a className="nav-link" href="#">社群</a>
                 </li>
             </ul>
-<<<<<<< HEAD
             <ul class="navbar-nav ml-auto">
-                <input type="checkbox" checked data-toggle="toggle" data-style="ios"
-                data-on="Dark" data-onstyle="outline-secondary" data-off="Light"
-                data-offstyle="outline-light"> 
-=======
-            <ul className="navbar-nav ml-auto">
-                <input type="checkbox"  defaultChecked data-toggle="toggle" data-style="ios"
-                data-on="Dark Mode" data-onstyle="dark" data-off="Light Mode"
-                data-offstyle="light"> 
->>>>>>> 044627439e990c3781f6d93c127c0c1d3952ec62
-                </input>
+                <BootstrapSwitchButton checked={true} onstyle="outline-dark" onlabel="Dark"
+                offstyle="outline-light" offlabel="Light"></BootstrapSwitchButton>
+
                 <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="#" id="navbardrop"
                     data-toggle="dropdown">

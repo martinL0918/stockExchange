@@ -1,0 +1,58 @@
+{
+  "name": "bootstrap-switch-button-react",
+  "version": "1.3.0-beta",
+  "author": {
+    "name": "Brent Ely",
+    "url": "https://github.com/gitbrent/"
+  },
+  "description": "Bootstrap Switch Button for React",
+  "homepage": "https://gitbrent.github.io/bootstrap-switch-button-react/",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gitbrent/bootstrap-switch-button-react.git"
+  },
+  "main": "lib/bootstrap-switch-button-react.js",
+  "types": "lib/bootstrap-switch-button-react.d.ts",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "start": "webpack --watch",
+    "build": "webpack -p"
+  },
+  "peerDependencies": {
+    "react": "^16.4.0"
+  },
+  "dependencies": {
+    "react": "^16.12.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@types/react": "^16.9.19",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "css-loader": "^3.4.2",
+    "style-loader": "^1.1.3",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  },
+  "keywords": [
+    "bootstrap",
+    "bootstrap-4",
+    "bootstrap-checkbox",
+    "bootstrap-react",
+    "bootstrap-switch-button",
+    "bootstrap-switch-button-react",
+    "react-switch-button",
+    "react-bootstrap-switch-button"
+  ],
+  "bugs": {
+    "url": "https://github.com/gitbrent/bootstrap-switch-button-react/issues"
+  }
+}

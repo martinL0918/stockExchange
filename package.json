@@ -1,0 +1,22 @@
+{
+  "name": "stockexchange",
+  "version": "1.0.0",
+  "description": "WELCOME TO STOCK EXCHANGE\r `````````````````````````\r Contrubuted by Martin Leung and Donald Tsang\r `````````````````````````",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinL0918/stockExchange.git"
+  },
+  "author": "Martin Leung and Donald Tsang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martinL0918/stockExchange/issues"
+  },
+  "homepage": "https://github.com/martinL0918/stockExchange#readme"
+}

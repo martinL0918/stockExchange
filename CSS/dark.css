@@ -81,6 +81,7 @@ footer{
 .tab-link:hover{
     color: #83b4e2;
     text-decoration: none;
+    border-radius: 30px;
 }
 
 .tab-link:active{
