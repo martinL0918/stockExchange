@@ -34,7 +34,7 @@ function CheckPassword(inputtxt)
 //Register 註冊功能
 document.getElementById("submit").addEventListener('click', () =>{
     //Check if the password is valid
-    if(CheckPassword(document.getElementById("pwd-register").value) == true){
+    //if(CheckPassword(document.getElementById("pwd-register").value) == true){
     let user = {
         email: document.getElementById("email-register").value,
         pwd: document.getElementById("pwd-register").value,
@@ -59,11 +59,16 @@ document.getElementById("submit").addEventListener('click', () =>{
                             });
         database.ref("/players/" + uid + "/mode2/").set({
             money:5000000,
-            hold_1: 0,
-            hold_2: 0,
-            hold_3: 0,
-            hold_4: 0,
-            hold_5: 0,
+            "001": 0,
+            "002": 0,
+            "003": 0,
+            "004": 0,
+            "005": 0,
+            "006": 0,
+            "007": 0,
+            "008": 0,
+            "009": 0,
+            "010": 0,
         });
         database.ref("/players/" + uid + "/mode3/").set({
             money:5000000,
@@ -86,9 +91,10 @@ document.getElementById("submit").addEventListener('click', () =>{
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode + " " + errorMessage);
-    })}else{
+    })
+    /*}else{
         
-    }
+    }*/
 })
 // Login 登入功能
 document.getElementById("login-btn").addEventListener('click', () => {
