@@ -1,5 +1,6 @@
 //import en from "../Locale/en/translate.json.json";
 //import hk from "../Locale/zh-hk/translate.json";
+import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 
 const footer = (
     <div>
@@ -23,9 +24,9 @@ const nav = (
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                
+
                 <BootstrapSwitchButton checked={true} onstyle="outline-dark" onlabel="Dark"
-                offstyle="outline-light" offlabel="Light"></BootstrapSwitchButton>
+                offstyle="outline-light" offlabel="Light" />
 
                 <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="#" id="navbardrop"
@@ -46,4 +47,4 @@ const nav = (
 );
 
 ReactDOM.render(footer, document.getElementById('footer'));
-ReactDOM.render(nav, document.getElementById('navb'));  //line 26 caused error, use defaultChecked in react instead of checked
+ReactDOM.render(nav, document.getElementById('navb'));  
