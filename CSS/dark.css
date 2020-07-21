@@ -51,8 +51,8 @@ body{
 }
 
 footer{
-    height: 50px;
-    margin-top: -5%;
+    height: 30px;
+    margin-top: -3.5%;
     font-size: 2px;
 }
  
@@ -131,5 +131,10 @@ footer{
     100% { transform: rotate(360deg); }
   }
 
-  .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
-  .toggle.ios .toggle-handle { border-radius: 20px; }
+  .toggle.ios, .toggle-on.ios, .toggle-off.ios { 
+      border-radius: 60px; 
+    }
+
+  .toggle.ios .toggle-handle { 
+      border-radius: 60px; 
+    }
