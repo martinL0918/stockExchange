@@ -23,6 +23,7 @@ const nav = (
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
+                
                 <BootstrapSwitchButton checked={true} onstyle="outline-dark" onlabel="Dark"
                 offstyle="outline-light" offlabel="Light"></BootstrapSwitchButton>
 

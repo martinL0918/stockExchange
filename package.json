@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/martinL0918/stockExchange/issues"
   },
-  "homepage": "https://github.com/martinL0918/stockExchange#readme"
+  "homepage": "https://github.com/martinL0918/stockExchange#readme",
+  "dependencies": {
+    "bootstrap-switch-button-react": "^1.2.0"
+  }
 }
