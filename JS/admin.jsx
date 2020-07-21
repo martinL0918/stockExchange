@@ -143,7 +143,7 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
                   <td>{this.props.price}</td>
                   <td>
                     <input type="textfield" id = {"text_"+this.props.code} style={{width: "100px"}}></input>
-                    <button onClick = {e => this.setPrice(e)} id = {this.props.code}>設定價格</button>
+                    <button onClick = {e => this.setPrice(e)} id = {this.props.code} className={"btn btn-sm btn-primary"}>設定價格</button>
                   </td>
               </tr>
           );
@@ -210,7 +210,7 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
             <h5 className={"float-left"}>歡迎: Admin</h5>
               <table className={"table table-light table-striped"}>
               <thead>
-                <tr>
+                <tr >
                   <th style={{width:"10%"}}>股票編號</th>
                   <th style={{width:"5%"}}>股票代碼</th>
                   <th style={{width:"30%"}}>股票名稱</th>

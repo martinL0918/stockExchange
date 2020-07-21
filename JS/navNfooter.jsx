@@ -23,9 +23,8 @@ const nav = (
                     <a className="nav-link" href="#">社群</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
-
-                <BootstrapSwitchButton checked={true} onstyle="outline-dark" onlabel="Dark"
+            <ul className="navbar-nav ml-auto">
+                <BootstrapSwitchButton checked={true} onstyle="outline-light" onlabel="Dark"
                 offstyle="outline-light" offlabel="Light" />
 
                 <li className="nav-item dropdown">

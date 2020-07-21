@@ -74,6 +74,10 @@ class StockRow extends React.Component{
                 <td>{this.props.name}</td>
                 <td>{this.props.price}</td>
                 <td>{this.props.playerData}</td>
+                <td>
+                    <input type="textfield" id = {"text_"+this.props.code} style={{width: "100px"}}></input>
+                    <button id = {"btn_"+this.props.code} className={"btn btn-sm btn-primary"}>購買</button>
+                </td>
             </tr>
         );
     }
@@ -186,6 +190,7 @@ class StockTable extends React.Component{
                   <th style={{width:"25%"}}>股票名稱</th>
                   <th style={{width:"10%"}}>股票價格</th>
                   <th style={{width:"10%"}}>持股量</th>
+                  <th style={{width:"45%"}}>操作</th>
               </tr>
             </thead>
             <tbody>
