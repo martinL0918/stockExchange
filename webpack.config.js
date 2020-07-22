@@ -4,7 +4,7 @@ module.exports = {
     mode: 'development',
     entry: ['./JS/navNfooter.jsx'],
     output: {
-        filename: 'bundle.js',
+        filename: './JS/bundle.js',
         path: path.resolve(__dirname, './'),
     },
     //將loader的設定寫在module的rules屬性中

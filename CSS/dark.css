@@ -139,3 +139,17 @@ footer{
   .toggle.ios .toggle-handle { 
       border-radius: 60px; 
     }
+
+    .icon-image{
+      width:30px;
+      height:30px;  
+    }
+    .post-font{
+        font-family: "Microsoft JhengHei";
+        font-size: 17;
+        margin-top: 10px;
+    }
+
+    .postTime-size{
+        font-size: 10;
+    }

@@ -7,23 +7,22 @@
         <link rel="stylesheet" href="CSS/dark.css">
         <script>
             function loadScreen(){
-            setTimeout(function(){
-                document.getElementById("loader").style.display = "none";
-                document.getElementById("stockTable").style.display = "block";
-            },4000)
-            }
+                setTimeout(function(){
+                    document.getElementById("loader").style.display = "none";
+                    document.getElementById("cardBody").style.display = "block";
+                },3000)
+                }
         </script>
     </head>
 
-    <body onload = "loadScreen()">
+    <bodY onload="loadScreen()">
         <div class = "loader" id="loader"></div>
         <div class="content-wrap" >
             <div id="navb"></div>
             <div class="container">
             <a href="gameMode.html"><i class='far fa-arrow-alt-circle-left float-left' style='font-size:48px;color:white;'></i></a>
-            <h1><b>交易所</b></h1>
             
-            <div id= "stockTable" style="display: none;"></div>
+            <div id= "cardBody" style="display: none;"></div>
             </div>
         </div>
 
@@ -57,9 +56,9 @@
          <!-- Load an icon library -->
         <script src="https://kit.fontawesome.com/1cbe56a0fa.js" crossorigin="anonymous"></script>
         <!-- 載入我們的 React component。-->
-        <script src="JS/gameTwo.jsx" type = "text/babel"></script>
+        <script src="JS/community.jsx" type = "text/babel"></script>
         <script src="JS/bundle.js" type="text/babel"></script>
         
 
-    </body>
+    </bodY>
 </html>

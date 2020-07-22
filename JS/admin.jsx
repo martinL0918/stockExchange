@@ -143,7 +143,7 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
                   <td>{this.props.price}</td>
                   <td>
                     <input type="textfield" id = {"text_"+this.props.code} style={{width: "100px"}}></input>
-                    <button onClick = {e => this.setPrice(e)} id = {this.props.code} className={"btn btn-sm btn-primary"}>設定價格</button>
+                    <button onclick = {e => this.setPrice(e)} id = {this.props.code} className={"btn btn-sm btn-primary"}>設定價格</button>
                   </td>
               </tr>
           );

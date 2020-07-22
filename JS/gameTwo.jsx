@@ -63,6 +63,87 @@ class AssetRow extends React.Component{
   }
 }
 class StockRow extends React.Component{
+  addHoldings(event){
+    var targetId = event.target.id
+    var start = targetId.indexOf("_")+1
+    var sqlID = targetId.substring(start)
+    var currentHoldings
+    var addStock = Number(document.getElementById("text_"+sqlID).value)
+    var currentStockPrice
+     //get player current hodldings
+        firebase.database().ref("players/"+user_id+"/mode2/"+sqlID).on("value", function(snapshot){
+          currentHoldings = Number(snapshot.val())
+    }, function (error){
+      console.log("Error: "+error.code)
+    })
+    //getStockPrice
+        firebase.database().ref("stocks/mode2/"+sqlID).on("value", function(snapshot){
+          currentStockPrice = Object.values(snapshot.val())[0]
+    }, function (error){
+      console.log("Error: "+error.code)
+    })
+    //update holdings
+    if (!isNaN(addStock) && addStock != ""){
+      firebase.database().ref("players/"+user_id+"/mode2/").update({
+          [sqlID] : currentHoldings + addStock
+      })
+      this.updatePrice("add",currentStockPrice * addStock)
+    }
+    else{
+      alert("欄位: "+sqlID+"不是正確數字")
+    }
+  }
+  subHoldings(event){
+    var targetId = event.target.id
+    var start = targetId.indexOf("_")+1
+    var sqlID = targetId.substring(start)
+    var currentHoldings
+    var subStock = Number(document.getElementById("text_"+sqlID).value)
+    var currentStockPrice
+    //console.log(sqlID)
+     //get player current hodldings
+        firebase.database().ref("players/"+user_id+"/mode2/"+sqlID).on("value", function(snapshot){
+          currentHoldings = Number(snapshot.val())
+    }, function (error){
+      console.log("Error: "+error.code)
+    })
+    //getStockPrice
+    firebase.database().ref("stocks/mode2/"+sqlID).on("value", function(snapshot){
+      currentStockPrice = Object.values(snapshot.val())[0]
+}, function (error){
+  console.log("Error: "+error.code)
+})
+    //update holdings
+    if (!isNaN(subStock) && subStock != ""){
+      firebase.database().ref("players/"+user_id+"/mode2/").update({
+          [sqlID] : currentHoldings - subStock
+      })
+      this.updatePrice("sub",currentStockPrice * subStock)
+    }
+    else{
+      alert("欄位: "+sqlID+"不是正確數字")
+    }
+  }
+  updatePrice(action,actionPrice){
+    var userMoney
+     //get player's money
+     firebase.database().ref("players/"+user_id+"/mode2/money").on("value", function(snapshot){
+      userMoney = Number(snapshot.val())
+      console.log(userMoney)
+    }, function (error){
+    console.log("Error: "+error.code)
+    })
+    if (action == "add"){
+      firebase.database().ref("players/"+user_id+"/mode2/").update({
+        money : userMoney - actionPrice
+    })
+  }
+    if (action == "sub"){
+      firebase.database().ref("players/"+user_id+"/mode2/").update({
+        money : userMoney + actionPrice
+    })
+  }
+}
     render(){
         /*playerName.forEach((name,index)=>{
             console.log(name,playerData[index])
@@ -75,8 +156,9 @@ class StockRow extends React.Component{
                 <td>{this.props.price}</td>
                 <td>{this.props.playerData}</td>
                 <td>
-                    <input type="textfield" id = {"text_"+this.props.code} style={{width: "100px"}}></input>
-                    <button id = {"btn_"+this.props.code} className={"btn btn-sm btn-primary"}>購買</button>
+                    <input type="number" id = {"text_"+this.props.code} style={{width: "30px"},{marginRight: "10px"}}></input>
+                    <button id = {"buybtn_"+this.props.code} onClick = {e => this.addHoldings(e)}className={"btn btn-sm btn-primary"} style={{marginRight: "10px"}}>購買</button>
+                    <button id = {"sellbtn_"+this.props.code} onClick = {e => this.subHoldings(e)}className={"btn btn-sm btn-primary"}>售出</button>
                 </td>
             </tr>
         );
