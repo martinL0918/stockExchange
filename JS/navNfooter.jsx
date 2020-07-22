@@ -18,9 +18,11 @@ firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
       logIn = "true"
+      navRendered.tick()
     }
     else{
         logIn = "false"
+        navRendered.tick()
     }
   });
 
@@ -38,12 +40,6 @@ class NavBar extends React.Component{
     constructor(props){
         super(props)
         this.state = {logged : "登入/創帳號"}
-    }
-    componentDidMount(){
-        setInterval(
-            () => this.tick(),
-            2000
-          );
     }
     tick(){
         if (logIn == "true"){
@@ -92,4 +88,4 @@ class NavBar extends React.Component{
 }
 
 ReactDOM.render(footer, document.getElementById('footer'));
-ReactDOM.render(<NavBar />, document.getElementById('navb'));  
+var navRendered = ReactDOM.render(<NavBar />, document.getElementById('navb'));  
