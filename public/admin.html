@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>股票交易 | Stock Overflow</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="CSS/light.css">
+        <link rel="stylesheet" href="CSS/dark.css">
+        <script>
+            function loadScreen(){
+            setTimeout(function(){
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("stockTable").style.display = "block";
+                document.getElementById("addStock").style.visibility = "visible";
+                document.getElementById("setSQL").style.visibility = "visible";
+            },4000)
+            }
+        </script>
+    </head>
+
+    <body onload = "loadScreen()">
+        <div class = "loader" id="loader"></div>
+        <div id="navb"></div>
+        <a href="gameMode.html"><i class='far fa-arrow-alt-circle-left float-left' style='font-size:48px;color:white;'></i></a>
+        <h1><b>Admin page</b></h1>
+        <div class="container">
+            <div id= "stockTable" style="display: none;"></div>
+        </div>
+        <div id="setSQL" style="visibility: hidden;">
+            <h1>Set Sql</h1>
+            <button id = "deleteMode2PlayersData">Delete All Players Data for mode 2</button>
+        </div>
+        <div id="addStock" style="visibility: hidden;">
+            <br>
+            <h1>新增Mode2 股票</h1>
+                <input type="textField" placeholder="股票代碼(3位字母)"" id="newStockAKA">
+                <input type="textField" placeholder="股票名稱"" id="newStockName">
+                <input type="textField" placeholder="股票價格" id="newStockPrice">
+                <button class="btn btn-primary" id="newStockBtn">新增</button>
+
+        </div>
+
+
+
+          <!-- Footer -->
+        <div id="footer"></div>
+
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+
+        <!-- Add Firebase products that you want to use -->
+        <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+        <script src = "https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js" ></script> 
+        <script type='text/javascript' src='config.js'></script>
+
+        
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <!-- 載入 React。 -->
+        <!-- 注意：在發佈應用程式前，請把「development.js」替換成「production.min.js」。 -->
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+         <!-- Load an icon library -->
+        <script src="https://kit.fontawesome.com/1cbe56a0fa.js" crossorigin="anonymous"></script>
+        <!-- 載入我們的 React component。-->
+        <script src="JS/admin.jsx" type = "text/babel"></script>
+        
+
+    </body>
+</html>

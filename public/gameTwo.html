@@ -1,43 +1,34 @@
 <html>
     <head>
-        <title>遊戲模式 | Stock Overflow</title>
-        
-        <!-- Add Icon-->
-        <link rel="icon" href="pic/1x/ICON.png" type="image/x-icon">
-
+        <title>股票交易 | Stock Overflow</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="CSS/light.css">
         <link rel="stylesheet" href="CSS/dark.css">
+        <script>
+            function loadScreen(){
+            setTimeout(function(){
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("stockTable").style.display = "block";
+            },4000)
+            }
+        </script>
     </head>
-    <body>
-        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-       <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-     <div class="content-wrap">
-        <div id="navb"></div>
-        <div class="container">
-        <p class= "remind-message">你沒有登入</p>
-        <p class= "remind-message">請選擇遊戲模式</p>
-        <button id="logout">登出</button><br></div>
-        <div class = "container-fluid">
-            <div class = "row">
 
-                <div class="col-md-12 col-lg-4">
-                    <button onclick="redirect()" class="btn btn-primary btn-gm">FIVEM</button>
-                </div>
-
-                <div class="col-md-12 col-lg-4">
-                    <button  class="btn btn-primary btn-gm" onclick ="redirectTwo()""> 虛擬股市</button>
-                </div>
-
-                <div class="col-md-12 col-lg-4">
-                    <button  class="btn btn-dark btn-gm" disabled> 實時股市</button>
-                </div>
-                <div class="col-md-2"></div>
+    <body onload = "loadScreen()">
+        <div class = "loader" id="loader"></div>
+        <div class="content-wrap" >
+            <div id="navb"></div>
+            <div class="container">
+            <a href="gameMode.html"><i class='far fa-arrow-alt-circle-left float-left' style='font-size:48px;color:white;'></i></a>
+            <h1 id="aTitle"><b>交易所</b></h1>
+            
+            <div id= "stockTable" style="display: none;"></div>
+            </div>
         </div>
-        </div>
-    </div>
+
+
+          <!-- Footer -->
         <div id="footer"></div>
 
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -48,7 +39,7 @@
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
         <script src = "https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js" ></script> 
         <script type='text/javascript' src='config.js'></script>
-        <script src="JS/gameMode.js"></script>
+
         
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -58,15 +49,17 @@
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
-        
         <!-- 載入 React。 -->
         <!-- 注意：在發佈應用程式前，請把「development.js」替換成「production.min.js」。 -->
         <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+         <!-- Load an icon library -->
+        <script src="https://kit.fontawesome.com/1cbe56a0fa.js" crossorigin="anonymous"></script>
+        <!-- 載入我們的 React component。-->
+        <script src="JS/gameTwo.jsx" type = "text/babel"></script>
+        <script src="JS/bundle.js" type="text/babel"></script>
+        
 
-        <!-- Our React scripts -->
-        <script type="text/babel" src="JS/bundle.js"></script>
-      </body>
+    </body>
 </html>

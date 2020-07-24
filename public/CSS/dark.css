@@ -2,12 +2,13 @@
 
 body{
     font-family: ‘Noto Sans TC’, sans-serif;
-    background-color: #121212;
+    background-color: #101010;
     color: white;
     text-align: center;
     font-size: 20px;
     font-weight: 300;
-    overflow-y: hidden;
+    overflow-y: scroll; 
+
 }
 
 .acc-title{
@@ -51,10 +52,12 @@ body{
 }
 
 footer{
-    height: 50px;
-    margin-top: -5%;
+    height: 30px;
+    margin-top: 3.5%;
     font-size: 2px;
+
 }
+ 
 
 .border-line{
     border-top: 1px solid #ebebeb;
@@ -67,19 +70,20 @@ footer{
 #tab-bar{
     color: white;
     justify-content: center;
-    padding: -3px;
+    padding: 5px;
 }
 
 .tab-link{
     color: #ebebeb;
     font-size: larger;
     justify-content: center;
-    margin: 120px;
+    margin: 60px;
 }
 
 .tab-link:hover{
     color: #83b4e2;
     text-decoration: none;
+    border-radius: 30px;
 }
 
 .tab-link:active{
@@ -87,14 +91,67 @@ footer{
 }
 
 .btn-gm{
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
     font-size: larger;
     font-weight: 400;
-    margin: 100px;
+    margin-top: 50px;
 }
 
 .remind-message{
     margin-top: 10px;
-    margin-bottom: 0px;
 }
+
+.nav-title{
+    font-weight: 400;
+    color: white;
+    margin-right: 30px;
+}
+
+.i{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .toggle.ios, .toggle-on.ios, .toggle-off.ios { 
+      border-radius: 60px; 
+    }
+
+  .toggle.ios .toggle-handle { 
+      border-radius: 60px; 
+    }
+
+    .icon-image{
+      width:30px;
+      height:30px;  
+    }
+    .post-font{
+        font-family: "Microsoft JhengHei";
+        font-size: 17;
+        margin-top: 10px;
+    }
+
+    .postTime-size{
+        font-size: 10;
+    }

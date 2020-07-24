@@ -23,6 +23,10 @@ var firebaseConfig = {
     // For testing
     location.replace("gameOne.html");
  }
+  function redirectTwo(){
+    // For testing
+    location.replace("gameTwo.html");
+ }
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -33,7 +37,7 @@ var firebaseConfig = {
       var uid = user.uid;
       var providerData = user.providerData;
       var displayName = user.displayName
-      document.getElementById("remind-message").innerHTML = "歡迎回來! " + user.displayName
+      document.getElementsByClassName("remind-message")[0].innerHTML = "歡迎回來! " + user.displayName
       console.log(displayName)
       // ...
     } else {
