@@ -50,7 +50,7 @@ class NavBar extends React.Component{
     constructor(props){
         super(props)
         this.state = {logged : (
-            <a className="nav-link" onClick={this.logOut}>
+            <a className="nav-link" href="acc.html">
             <i className="far fa-user-circle" ></i>登入/創帳號
             </a>
         )}
@@ -66,13 +66,6 @@ class NavBar extends React.Component{
                 </a>
             )})
         }
-        else{
-            this.setState({logged : (
-                <a className="nav-link" href="acc.html">
-                <i className="far fa-user-circle" ></i>登入/創帳號
-                </a>
-            )}) 
-        };
     }
     logOut(){
         firebase.auth().signOut().then(function() {

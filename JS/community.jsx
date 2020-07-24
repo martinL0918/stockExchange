@@ -113,10 +113,10 @@ function addPost() {
               marginBottom: "40px"
           };
         /*
-            修改HTML需知:
+            DONALD 修改下方HTML需知:
             {this.props.time} = 發佈時間
             {this.props.content} = 文字內容
-            {this.state.adminDisplay} = 刪除果個交叉 如果要改交叉樣式，要睇翻上面幾行 adminDelete = (...); 裹面就係
+            {this.state.adminDisplay} = 刪POST果個交叉 如果要改交叉樣式，要睇翻上面幾行 adminDelete = (...); 裹面就係
         */
           return(
 

@@ -21,7 +21,7 @@ var firebaseConfig = {
     var user_id;
     var nickName = "loading";
   
-  
+nextStep = "升"
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -100,7 +100,8 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
          if (!isNaN(newStockPrice)){
               firebase.database().ref("stocks/"+"/mode2/"+ans).set({
               _name :  newStockName, 
-              [newStockAKA]: newStockPrice
+              [newStockAKA]: newStockPrice,
+              _flow : "平穩"
             })
          }
          else{
@@ -134,6 +135,23 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
              alert("欄位: "+targetId+"不是正確數字")
          }
       }
+      setFlow(id){
+        const translate = {rup: "急升",
+                          sup: "穩升",
+                          normal: "平穩",
+                          sdown: "下跌",
+                          rdown: "急跌",}
+        var targetID = id.target.id
+        var firstUnder = targetID.indexOf("_")
+        var secondUnder = targetID.indexOf("_", firstUnder+1)
+        var targetAction = targetID.substring(firstUnder+1,secondUnder) //目標走向
+        var targetCode = targetID.substring(secondUnder+1)
+        console.log(targetCode)
+        var update = translate[targetAction]  //更新資料
+        firebase.database().ref("stocks/"+"/mode2/"+targetCode).update({
+          _flow : update
+        })
+      }
       render(){
           return(
               <tr>
@@ -143,7 +161,15 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
                   <td>{this.props.price}</td>
                   <td>
                     <input type="textfield" id = {"text_"+this.props.code} style={{width: "100px"}}></input>
-                    <button onclick = {e => this.setPrice(e)} id = {this.props.code} className={"btn btn-sm btn-primary"}>設定價格</button>
+                    <button onClick = {e => this.setPrice(e)} id = {this.props.code} className={"btn btn-sm btn-primary mx-1"}>設定價格</button>
+                    <button onClick = {e => this.setFlow(e)} id = {"flow_rup_"+ this.props.code} className={"btn btn-sm btn-primary mr-1"}>急升</button>
+                    <button onClick = {e => this.setFlow(e)} id = {"flow_sup_"+ this.props.code} className={"btn btn-sm btn-primary mr-1"}>穩升</button>
+                    <button onClick = {e => this.setFlow(e)} id = {"flow_normal_"+ this.props.code} className={"btn btn-sm btn-primary mr-1"}>平穩</button>
+                    <button onClick = {e => this.setFlow(e)} id = {"flow_sdown_"+ this.props.code} className={"btn btn-sm btn-primary mr-1"}>下跌</button>
+                    <button onClick = {e => this.setFlow(e)} id = {"flow_rdown_"+ this.props.code} value={this.props.code} className={"btn btn-sm btn-primary mr-1"}>急跌</button>
+                  </td>
+                  <td>
+                  <label>{this.props.flow}</label>
                   </td>
               </tr>
           );
@@ -161,7 +187,8 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
                     shareCode: ["000"],
                     shareAKA :["Loading"],
                     shareName :["Loading"],
-                    sharePrice : [0]};
+                    sharePrice : [0],
+                    shareFlow : "讀取"};
                      
     }
       componentDidMount(){
@@ -175,34 +202,41 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
          var stockAKA = ["Loading",] //股票代號
          var stockName = []
          var stockPrice = [0]
+         var stockFlow = ["讀取"]
          //股票代碼
          firebase.database().ref("stocks/mode2").on("value", function(snapshot){
         //股票編號
            stockCode = Object.keys(snapshot.val())
+           stockCode.forEach((element,index)=>{
+        //股票名稱
+            stockName[index] = snapshot.child(element+"/_name").val()
+         //股票走向
+            stockFlow[index] = snapshot.child(element+"/_flow").val()
+           })
           Object.values(snapshot.val()).forEach((element,index) => {
             stockAKA[index] = Object.keys(element)[0]
           });
-          //股票名稱
-          Object.values(snapshot.val()).forEach((element,index) => {
-            stockName[index] = Object.values(element)[1]
-          });
+
+        //股票價格
           Object.values(snapshot.val()).forEach((element,index) => {
             stockPrice[index] = Object.values(element)[0]
           });
-        }, function (error){
-          console.log("Error: "+error.code)
-        })
+        
+
+        
+      })
         this.setState({uid : user_id});
         this.setState({shareAKA : stockAKA})
         this.setState({shareName : stockName})
         this.setState({shareCode : stockCode})
         this.setState({sharePrice : stockPrice})
+        this.setState({shareFlow : stockFlow})
       }
       render(){
           const row = [];
           for (var index=0;index<=this.state.sharePrice.length - 1 ;index++){ //選擇顯示的股票數目
                   row.push(
-                      <StockRow AKA = {this.state.shareAKA[index]} name = {this.state.shareName[index]}price = {this.state.sharePrice[index]} key ={index} uid = {this.state.uid} code={this.state.shareCode[index]}/>
+                      <StockRow AKA = {this.state.shareAKA[index]} name = {this.state.shareName[index]}price = {this.state.sharePrice[index]} key ={index} uid = {this.state.uid} code={this.state.shareCode[index]}  flow ={this.state.shareFlow[index]}/>
                   );
               }
           return (
@@ -213,9 +247,10 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
                 <tr >
                   <th style={{width:"10%"}}>股票編號</th>
                   <th style={{width:"5%"}}>股票代碼</th>
-                  <th style={{width:"30%"}}>股票名稱</th>
+                  <th style={{width:"20%"}}>股票名稱</th>
                   <th style={{width:"10%"}}>股票價格</th>
-                  <th style={{width:"45%"}}>Admin操作</th>
+                  <th style={{width:"48%"}}>Admin操作</th>
+                  <th style={{width:"7%"}}>走向</th>
                 </tr>
               </thead>
               <tbody>
