@@ -13,11 +13,21 @@ var firebaseConfig = {
     measurementId:  config.measurementId,
 }
 var logIn = "false";
-
+var nickName = "載入中";
+/*
+    Change .css
+    document.getElementById("pagestyle").setAttribute("href", sheet);  
+*/
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      // User is signed in.
+      // User is signed in. 
+      firebase.database().ref("players/"+ user.uid).on("value", function(snapshot){
+      nickName = snapshot.val().name
+    }, function (error){
+      console.log("Error: "+error.code)
+    })
       logIn = "true"
+      console.log(nickName)
       navRendered.tick()
     }
     else{
@@ -39,16 +49,36 @@ const footer = (
 class NavBar extends React.Component{
     constructor(props){
         super(props)
-        this.state = {logged : "登入/創帳號"}
+        this.state = {logged : (
+            <a className="nav-link" onClick={this.logOut}>
+            <i className="far fa-user-circle" ></i>登入/創帳號
+            </a>
+        )}
+    }
+    componentDidMount(){
+        setInterval(() => this.tick(),2000)
     }
     tick(){
         if (logIn == "true"){
-            this.setState({logged : "已登入"})
+            this.setState({logged : (
+                <a className="nav-link" onClick={this.logOut}>
+                <i className="far fa-user-circle" ></i>{nickName}
+                </a>
+            )})
         }
         else{
-            this.setState({logged : "登入/創帳號"})
-        }
-          
+            this.setState({logged : (
+                <a className="nav-link" href="acc.html">
+                <i className="far fa-user-circle" ></i>登入/創帳號
+                </a>
+            )}) 
+        };
+    }
+    logOut(){
+        firebase.auth().signOut().then(function() {
+            alert("你登出了")
+          })
+          location.reload()
     }
     render(){
         return(
@@ -77,8 +107,7 @@ class NavBar extends React.Component{
                         </div>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="acc.html">
-                            <i className="far fa-user-circle"></i>{this.state.logged}</a>
+                        {this.state.logged}
                     </li>
                 </ul>
               </nav>

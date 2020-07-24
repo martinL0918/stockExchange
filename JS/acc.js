@@ -14,7 +14,7 @@ const database = firebase.database();
 
 function redirect(){
     // For testing
-    location.replace("gameMode.html");
+    window.history.back()
 }
 
 function CheckPassword(inputtxt) 
@@ -123,9 +123,7 @@ document.getElementById("login-btn").addEventListener('click', () => {
           var isAnonymous = user.isAnonymous;
           var uid = user.uid;
           var providerData = user.providerData;
-          setTimeout(function(){ alert("Welcome! "+ user.displayName); redirect()},1500)
-          //redirect()
-          // ...
+
         } else {
           console.log("Good Bye")
         }
