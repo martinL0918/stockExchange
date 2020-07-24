@@ -35,6 +35,8 @@ firebase.auth().onAuthStateChanged(function(user) {
       })// ...
   } else {
     alert("請先登入")
+    document.getElementById("stockTable").style.visibility = "hidden";
+    document.getElementById("aTitle").innerHTML = "請先登入";
   }
 });
 class AssetRow extends React.Component{
