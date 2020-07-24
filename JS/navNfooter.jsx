@@ -85,6 +85,9 @@ class NavBar extends React.Component{
                     <li className="nav-item">
                         <a className="nav-link" href="#">社群</a>
                     </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="gameMode.html">股市</a>
+                    </li>
                 </ul>
                 <ul className="navbar-nav ml-auto">
                     <BootstrapSwitchButton checked={true} onstyle="outline-light" onlabel="Dark"
