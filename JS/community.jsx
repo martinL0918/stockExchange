@@ -20,11 +20,10 @@ var firebaseConfig = {
     const database = firebase.database();
     var user_id;
     var nickName = "loading";
-    var test = (
+    var adminInput = (
         <div className="mb-5" style={{position:"relative"}}>
-           <p>要新增的新聞: </p>
            <div style={{height:"120px"}} className="p-0">
-            <textarea id="newsContent" style={{width:"500px",fontSize:"13px",height:"100%",paddingRight:"30px"}}></textarea>
+            <textarea id="newsContent" style={{width:"500px",fontSize:"13px",height:"100%",paddingRight:"30px"}} placeholder="要新增的新聞"></textarea>
             <button className="btn btn-primary" style={{bottom:"0",position:"absolute"}} id="addPost" onClick={addPost}>新增</button>
            </div>
            
@@ -43,10 +42,10 @@ var firebaseConfig = {
           console.log("Error: "+error.code)
         })// ...
         if (user.uid != "lnUEYL7LL2auR6KyvCfxCyy85P73" && user.uid !="eiQEHqoNQXgW7cLNFroOSlpVBCc2"){
-            test = (<div></div>)
+            adminInput = (<div></div>)
         }
     } else {
-        test = (<div></div>)
+        adminInput = (<div></div>)
     }
   });
 function addPost() {
@@ -113,7 +112,12 @@ function addPost() {
               width: "50%",
               marginBottom: "40px"
           };
-
+        /*
+            修改HTML需知:
+            {this.props.time} = 發佈時間
+            {this.props.content} = 文字內容
+            {this.state.adminDisplay} = 刪除果個交叉 如果要改交叉樣式，要睇翻上面幾行 adminDelete = (...); 裹面就係
+        */
           return(
 
                 <div className="card border-0" style={cardStyle}>
@@ -173,7 +177,7 @@ function addPost() {
             <div>
                 <div className="container">
                 <h1 style={{marginBottom:"30px"}}>股市新聞</h1>
-                {test}
+                {adminInput}
                 {row}
                 </div>
             </div> 
