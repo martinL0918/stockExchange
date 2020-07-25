@@ -201,29 +201,25 @@ class StockTable extends React.Component{
        }, function (error){
          console.log("Error: "+error.code)
        })
-       //股票代碼
        firebase.database().ref("stocks/mode2").on("value", function(snapshot){
-        //股票編號
+        //股票編號 e.g. 001 002
            stockCode = Object.keys(snapshot.val())
-          Object.values(snapshot.val()).forEach((element,index) => {
-            stockAKA[index] = Object.keys(element)[0]
-          });
-          //股票名稱
-          Object.values(snapshot.val()).forEach((element,index) => {
-            stockName[index] = Object.values(element)[1]
-          });
-          Object.values(snapshot.val()).forEach((element,index) => {
-            stockPrice[index] = Object.values(element)[0]
-          });
-        }, function (error){
-          console.log("Error: "+error.code)
-        })
+           stockCode.forEach((element,index)=>{
+        //股票代碼
+            stockAKA[index] = snapshot.child(element + "/_code").val()
+        //股票名稱
+            stockName[index] = snapshot.child(element+"/_name").val()
+        //股票價格
+            stockPrice[index] = snapshot.child(element + "/_price").val()
+
+           })
+      })
       this.setState({uid : user_id});
-      this.setState({shareCode : stockCode})
       this.setState({shareAKA : stockAKA})
       this.setState({shareName : stockName})
+      this.setState({shareCode : stockCode})
       this.setState({sharePrice : stockPrice})
-      this.setState({holdings: playerHoldings})
+      this.setState({holdings : playerHoldings})
     }
     checkSQL(){
       var sqlAmount = []

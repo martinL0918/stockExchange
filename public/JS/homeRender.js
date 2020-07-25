@@ -14,8 +14,18 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 class Hello extends React.Component{
+    refresh(){
+        location.reload(true);
+    }
     render(){
-        return <div style={{backgroundColor:"red"}}><h1>Hello World</h1></div>
+
+        return (
+        <div style={{backgroundColor:"red"}}>
+            <h1>Hello World</h1>
+            <button className="btn btn-primary" onClick={this.refresh}>Hard refresh</button>
+            </div>
+        
+        )
     }
 }
 

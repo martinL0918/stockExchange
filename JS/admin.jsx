@@ -21,13 +21,11 @@ var firebaseConfig = {
     var user_id;
     var nickName = "loading";
   
-nextStep = "升"
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
       user_id = user.uid;
       var providerData = user.providerData;
-      console.log("Welcome "+ user.name)  
       //read nickName
       firebase.database().ref("players/"+ user.uid).on("value", function(snapshot){
         nickName = snapshot.val().name
@@ -100,8 +98,9 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
          if (!isNaN(newStockPrice)){
               firebase.database().ref("stocks/"+"/mode2/"+ans).set({
               _name :  newStockName, 
-              [newStockAKA]: newStockPrice,
-              _flow : "平穩"
+              _price: newStockPrice,
+              _flow : "平穩",
+              _code : newStockAKA
             })
          }
          else{
@@ -135,7 +134,7 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
              alert("欄位: "+targetId+"不是正確數字")
          }
       }
-      setFlow(id){
+      setFlow(id,stockPrice){
         const translate = {rup: "急升",
                           sup: "穩升",
                           normal: "平穩",
@@ -146,10 +145,28 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
         var secondUnder = targetID.indexOf("_", firstUnder+1)
         var targetAction = targetID.substring(firstUnder+1,secondUnder) //目標走向
         var targetCode = targetID.substring(secondUnder+1)
-        console.log(targetCode)
         var update = translate[targetAction]  //更新資料
+        var newPrice
+        switch (targetAction){
+          case "rup":
+            newPrice = stockPrice * (Math.random() * (rupRate.max - rupRate.min) + rupRate.min)
+            break;
+          case "sup":
+            newPrice = stockPrice * (Math.random() * (supRate.max - supRate.min) + supRate.min)
+            break;
+          case "normal":
+            newPrice = stockPrice * (Math.random() * (normalRate.max - normalRate.min) + normalRate.min)
+            break;
+          case "sdown":
+            newPrice = stockPrice * (Math.random() * (sdownRate.max - sdownRate.min) + sdownRate.min)
+            break;
+          case "rdown":
+            newPrice = stockPrice * (Math.random() * (rdownRate.max - rdownRate.min) + rdownRate.min)
+        }
         firebase.database().ref("stocks/"+"/mode2/"+targetCode).update({
-          _flow : update
+          _flow : update,
+          _price : newPrice.toFixed(2)
+
         })
       }
       render(){
@@ -161,12 +178,12 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
                   <td>{this.props.price}</td>
                   <td>
                     <input type="textfield" id = {"text_"+this.props.code} style={{width: "100px"}}></input>
-                    <button onClick = {e => this.setPrice(e)} id = {this.props.code} className={"btn btn-sm btn-primary mx-1"}>設定價格</button>
-                    <button onClick = {e => this.setFlow(e)} id = {"flow_rup_"+ this.props.code} className={"btn btn-sm btn-primary mr-1"}>急升</button>
-                    <button onClick = {e => this.setFlow(e)} id = {"flow_sup_"+ this.props.code} className={"btn btn-sm btn-primary mr-1"}>穩升</button>
-                    <button onClick = {e => this.setFlow(e)} id = {"flow_normal_"+ this.props.code} className={"btn btn-sm btn-primary mr-1"}>平穩</button>
-                    <button onClick = {e => this.setFlow(e)} id = {"flow_sdown_"+ this.props.code} className={"btn btn-sm btn-primary mr-1"}>下跌</button>
-                    <button onClick = {e => this.setFlow(e)} id = {"flow_rdown_"+ this.props.code} value={this.props.code} className={"btn btn-sm btn-primary mr-1"}>急跌</button>
+                    <button onClick = {e => this.setPrice(e,this.props.price)} id = {this.props.code} className={"btn btn-sm btn-primary mx-1"}>設定價格</button>
+                    <button onClick = {e => this.setFlow(e,this.props.price)} id = {"flow_rup_"+ this.props.code} className={"btn btn-sm btn-primary mr-1"}>急升</button>
+                    <button onClick = {e => this.setFlow(e,this.props.price)} id = {"flow_sup_"+ this.props.code} className={"btn btn-sm btn-primary mr-1"}>穩升</button>
+                    <button onClick = {e => this.setFlow(e,this.props.price)} id = {"flow_normal_"+ this.props.code}  className={"btn btn-sm btn-primary mr-1"}>平穩</button>
+                    <button onClick = {e => this.setFlow(e,this.props.price)} id = {"flow_sdown_"+ this.props.code}  className={"btn btn-sm btn-primary mr-1"}>下跌</button>
+                    <button onClick = {e => this.setFlow(e,this.props.price)} id = {"flow_rdown_"+ this.props.code}   className={"btn btn-sm btn-primary mr-1"}>急跌</button>
                   </td>
                   <td>
                   <label>{this.props.flow}</label>
@@ -203,27 +220,21 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
          var stockName = []
          var stockPrice = [0]
          var stockFlow = ["讀取"]
-         //股票代碼
+         
          firebase.database().ref("stocks/mode2").on("value", function(snapshot){
-        //股票編號
+        //股票編號 e.g. 001 002
            stockCode = Object.keys(snapshot.val())
            stockCode.forEach((element,index)=>{
+        //股票代碼
+            stockAKA[index] = snapshot.child(element + "/_code").val()
         //股票名稱
             stockName[index] = snapshot.child(element+"/_name").val()
+        //股票價格
+            stockPrice[index] = snapshot.child(element + "/_price").val()
          //股票走向
             stockFlow[index] = snapshot.child(element+"/_flow").val()
            })
-          Object.values(snapshot.val()).forEach((element,index) => {
-            stockAKA[index] = Object.keys(element)[0]
-          });
 
-        //股票價格
-          Object.values(snapshot.val()).forEach((element,index) => {
-            stockPrice[index] = Object.values(element)[0]
-          });
-        
-
-        
       })
         this.setState({uid : user_id});
         this.setState({shareAKA : stockAKA})
