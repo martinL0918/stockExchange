@@ -277,6 +277,12 @@ class StockTable extends React.Component{
                 {row}
             </tbody>
             </table>
+            <hr className = "mt-5" style={{height:"2px"},{borderWidth:"0"},{color:"gray"},{backgroundColor:"gray"}}></hr>
+                <div className="float-sm-left text-sm-left">
+                  <h5>規則:</h5>
+                  <p className="small">1. 不懂跳動</p>
+                  <p className="small">2. 每人一開始有500萬現金</p>
+                </div>
           </div> 
         );
     }
