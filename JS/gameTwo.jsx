@@ -65,6 +65,11 @@ class AssetRow extends React.Component{
   }
 }
 class StockRow extends React.Component{
+  componentDidMount(){
+    setInterval(
+      () => this.changePrice()
+    ,2000)
+  }
   addHoldings(event){
     var targetId = event.target.id
     var start = targetId.indexOf("_")+1
@@ -144,6 +149,58 @@ class StockRow extends React.Component{
       firebase.database().ref("players/"+user_id+"/mode2/").update({
         money : userMoney + actionPrice
     })
+  }
+}
+changePrice(){
+  var lastUpdate
+  var timeDifference
+  var stockArray = []
+  var stockPrice = []
+  var nextAction = []
+  var currentTime = new Date().getTime();
+  var newPrice = 1
+  //讀取最後更新時間
+  firebase.database().ref("time/mode2").on("value", function(snapshot){
+    lastUpdate = snapshot.child("lastUpdate").val()
+  })
+  timeDifference = (currentTime - lastUpdate) / 1000
+  if (timeDifference >= updateTime - 0.25) { 
+    //讀取所有股票
+      firebase.database().ref("stocks/mode2").once("value", function(snapshot){
+        stockArray = Object.keys(snapshot.val())
+        stockArray.forEach((element,index) => {
+            stockPrice[index] = snapshot.child(element+"/_price").val()
+            nextAction[index] = snapshot.child(element+"/_flow").val()
+            console.log(nextAction[index])
+            switch (nextAction[index]){
+              case "急升":
+                newPrice = stockPrice[index] * (Math.random() * (rupRate.max - rupRate.min) + rupRate.min)
+                break;
+              case "穩升":
+                newPrice = stockPrice[index] * (Math.random() * (supRate.max - supRate.min) + supRate.min)
+                break;
+              case "平穩":
+                newPrice = stockPrice[index] * (Math.random() * (normalRate.max - normalRate.min) + normalRate.min)
+                break;
+              case "下跌":
+                newPrice = stockPrice[index] * (Math.random() * (sdownRate.max - sdownRate.min) + sdownRate.min)
+                break;
+              case "急跌":
+                newPrice = stockPrice[index] * (Math.random() * (rdownRate.max - rdownRate.min) + rdownRate.min)
+                break;
+              default :
+                newPrice = 888
+            }
+            firebase.database().ref("stocks/"+"/mode2/"+element).update({
+              _price : newPrice.toFixed(2)
+            })
+        })
+        console.log(stockPrice)
+    })
+      firebase.database().ref("time/mode2").update({
+        lastUpdate : currentTime
+    })
+    console.log("Time passed: "+ timeDifference)
   }
 }
     render(){
@@ -280,7 +337,7 @@ class StockTable extends React.Component{
             <hr className = "mt-5" style={{height:"2px"},{borderWidth:"0"},{color:"gray"},{backgroundColor:"gray"}}></hr>
                 <div className="float-sm-left text-sm-left">
                   <h5>規則:</h5>
-                  <p className="small">1. 不懂跳動</p>
+                  <p className="small">1. 每十秒跳動一次(For Testing)</p>
                   <p className="small">2. 每人一開始有500萬現金</p>
                 </div>
           </div> 

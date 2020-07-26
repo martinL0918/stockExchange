@@ -115,19 +115,11 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
   class StockRow extends React.Component{
       setPrice(id){
           var targetId = id.target.id
-          var targetName
           var newPrice = document.getElementById("text_"+targetId).value
-        //get stock name
-            firebase.database().ref("stocks/mode2/"+targetId).on("value", function(snapshot){
-                    targetName = Object.keys(snapshot.val())[0];
-                    console.log(targetName)
-              }, function (error){
-                console.log("Error: "+error.code)
-        })
         //update price
         if (!isNaN(newPrice)){
             firebase.database().ref("stocks/"+"/mode2/"+targetId).update({
-                [targetName] : newPrice
+                _price : newPrice
             })
          }
          else{
@@ -147,6 +139,7 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
         var targetCode = targetID.substring(secondUnder+1)
         var update = translate[targetAction]  //更新資料
         var newPrice
+        /* For debug (即時更新)
         switch (targetAction){
           case "rup":
             newPrice = stockPrice * (Math.random() * (rupRate.max - rupRate.min) + rupRate.min)
@@ -162,12 +155,68 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
             break;
           case "rdown":
             newPrice = stockPrice * (Math.random() * (rdownRate.max - rdownRate.min) + rdownRate.min)
-        }
+        }*/
         firebase.database().ref("stocks/"+"/mode2/"+targetCode).update({
-          _flow : update,
-          _price : newPrice.toFixed(2)
-
+          _flow : update
+          //_price : newPrice.toFixed(2)
         })
+      }
+      changePrice(){
+        var lastUpdate
+        var timeDifference
+        var stockArray = []
+        var stockPrice = []
+        var nextAction = []
+        var currentTime = new Date().getTime();
+        var newPrice = 1
+        //讀取最後更新時間
+        firebase.database().ref("time/mode2").on("value", function(snapshot){
+          lastUpdate = snapshot.child("lastUpdate").val()
+        })
+        timeDifference = (currentTime - lastUpdate) / 1000
+        if (timeDifference >= updateTime - 0.25) { 
+          //讀取所有股票
+            firebase.database().ref("stocks/mode2").once("value", function(snapshot){
+              stockArray = Object.keys(snapshot.val())
+              stockArray.forEach((element,index) => {
+                  stockPrice[index] = snapshot.child(element+"/_price").val()
+                  nextAction[index] = snapshot.child(element+"/_flow").val()
+                  console.log(nextAction[index])
+                  switch (nextAction[index]){
+                    case "急升":
+                      newPrice = stockPrice[index] * (Math.random() * (rupRate.max - rupRate.min) + rupRate.min)
+                      break;
+                    case "穩升":
+                      newPrice = stockPrice[index] * (Math.random() * (supRate.max - supRate.min) + supRate.min)
+                      break;
+                    case "平穩":
+                      newPrice = stockPrice[index] * (Math.random() * (normalRate.max - normalRate.min) + normalRate.min)
+                      break;
+                    case "下跌":
+                      newPrice = stockPrice[index] * (Math.random() * (sdownRate.max - sdownRate.min) + sdownRate.min)
+                      break;
+                    case "急跌":
+                      newPrice = stockPrice[index] * (Math.random() * (rdownRate.max - rdownRate.min) + rdownRate.min)
+                      break;
+                    default :
+                      newPrice = 888
+                  }
+                  firebase.database().ref("stocks/"+"/mode2/"+element).update({
+                    _price : newPrice.toFixed(2)
+                  })
+              })
+              console.log(stockPrice)
+          })
+            firebase.database().ref("time/mode2").update({
+              lastUpdate : currentTime
+          })
+          console.log("Time passed: "+ timeDifference)
+        }
+      }
+      componentDidMount(){
+        setInterval(
+          () => this.changePrice(),2000
+        )
       }
       render(){
           return(
@@ -214,6 +263,7 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
           2000
         );
       }
+
       tick(){
          var stockCode = []
          var stockAKA = ["Loading",] //股票代號
@@ -234,7 +284,6 @@ document.getElementById("newStockBtn").addEventListener('click',function(){
          //股票走向
             stockFlow[index] = snapshot.child(element+"/_flow").val()
            })
-
       })
         this.setState({uid : user_id});
         this.setState({shareAKA : stockAKA})
