@@ -90,8 +90,6 @@ class NavBar extends React.Component{
                     </li>
                 </ul>
                 <ul className="navbar-nav ml-auto">
-                    <BootstrapSwitchButton checked={true} onstyle="outline-light" onlabel="Dark"
-                    offstyle="outline-light" offlabel="Light" />
     
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbardrop"
