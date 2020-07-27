@@ -57,3 +57,30 @@ body{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+.icon-image{
+    width:30px;
+    height:30px;  
+  }
+  .post-font{
+      font-family: "Microsoft JhengHei";
+      font-size: 17;
+      margin-top: 10px;
+  }
+
+  .postTime-size{
+      font-size: 10;
+  }
+
+  .card-title-font{
+      color: white
+  }
+  .cardBorder{
+      border-style: solid;
+      border-radius: 10px;
+      border-width: 5px;
+      border-color: black;
+  }
+  .navBackIcon{
+    font-size:48px;
+    color: black
+}

@@ -155,3 +155,11 @@ footer{
     .postTime-size{
         font-size: 10;
     }
+    .cardBorder{
+        border-style: hidden;
+        border-width: 0px;
+    }
+    .navBackIcon{
+        font-size:48px;
+        color: white
+    }
