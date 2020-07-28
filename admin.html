@@ -3,8 +3,7 @@
         <title>股票交易 | Stock Overflow</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="CSS/light.css">
-        <link rel="stylesheet" href="CSS/dark.css">
+        <link rel="stylesheet" href="CSS/dark.css" id= "pageStyle">
         <script>
             function loadScreen(){
             setTimeout(function(){
@@ -20,7 +19,7 @@
     <body onload = "loadScreen()">
         <div class = "loader" id="loader"></div>
         <div id="navb"></div>
-        <a href="gameMode.html"><i class='far fa-arrow-alt-circle-left float-left' style='font-size:48px;color:white;'></i></a>
+        <a href="gameMode.html"><i class='far fa-arrow-alt-circle-left float-left' class="navIcon"></i></a>
         <h1><b>Admin page</b></h1>
         <div class="container">
             <div id= "stockTable" style="display: none;"></div>

@@ -168,3 +168,11 @@ footer{
         -ms-transform: translateY(-50%);
         transform: translateY(-50%);
     }
+    .cardBorder{
+        border-style: hidden;
+        border-width: 0px;
+    }
+    .navBackIcon{
+        font-size:48px;
+        color: white
+    }

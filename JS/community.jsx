@@ -120,9 +120,9 @@ function addPost() {
         */
           return(
 
-                <div className="card border-0" style={cardStyle}>
+                <div className="card cardBorder" style={cardStyle}>
                 <div className="card-header bg-dark">  
-                <h5 className="card-title float-left"><img src="https://www.flaticon.com/premium-icon/icons/svg/202/202333.svg" className="icon-image" ></img>索羅斯股市新聞中心</h5>
+                <h5 className="card-title float-left card-title-font"><img src="https://www.flaticon.com/premium-icon/icons/svg/202/202333.svg" className="icon-image" ></img>索羅斯股市新聞中心</h5>
                 {this.state.adminDisplay}
                 </div>
                     <div className="card-body p-0 pl-2">
