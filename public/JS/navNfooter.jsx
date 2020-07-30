@@ -53,7 +53,8 @@ class NavBar extends React.Component{
             <a className="nav-link" href="acc.html">
             <i className="far fa-user-circle" ></i>登入/創帳號
             </a>
-        )}
+        ),
+        isChecked : false} //default value of the button
     }
     componentDidMount(){
         setInterval(() => this.tick(),2000)
@@ -73,6 +74,18 @@ class NavBar extends React.Component{
           })
           location.reload()
     }
+    //Theme Button
+    changeStyle(){
+        if (this.state.isChecked == false){ //false 即係之前未按過，而家第一次按所以換做light theme
+            document.getElementById("pageStyle").setAttribute("href", "CSS/light.css");
+            this.setState({isChecked : true})
+
+        }
+        else{ //true 即係之前按過，而家再按所以換翻做dark theme
+            document.getElementById("pageStyle").setAttribute("href", "CSS/dark.css");  
+            this.setState({isChecked : false})
+        }
+    }
     render(){
         return(
             <div>
@@ -90,9 +103,8 @@ class NavBar extends React.Component{
                     </li>
                 </ul>
                 <ul className="navbar-nav ml-auto">
-                    <BootstrapSwitchButton checked={true} onstyle="outline-light" onlabel="Dark"
-                    offstyle="outline-light" offlabel="Light" />
-    
+                <BootstrapSwitchButton checked={true} onstyle="outline-light" onlabel="Dark"	
+                    offstyle="outline-light" offlabel="Light" onChange = {() => this.changeStyle()} />
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbardrop"
                         data-toggle="dropdown">

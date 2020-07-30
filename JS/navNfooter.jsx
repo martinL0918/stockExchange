@@ -54,7 +54,7 @@ class NavBar extends React.Component{
             <i className="far fa-user-circle" ></i>登入/創帳號
             </a>
         ),
-        isChecked : false}
+        isChecked : false} //default value of the button
     }
     componentDidMount(){
         setInterval(() => this.tick(),2000)
@@ -76,13 +76,13 @@ class NavBar extends React.Component{
     }
     //Theme Button
     changeStyle(){
-        if (this.state.isChecked == false){
-            document.getElementById("pageStyle").setAttribute("href", "Css/light.css");
+        if (this.state.isChecked == false){ //false 即係之前未按過，而家第一次按所以換做light theme
+            document.getElementById("pageStyle").setAttribute("href", "CSS/light.css");
             this.setState({isChecked : true})
 
         }
-        else{
-            document.getElementById("pageStyle").setAttribute("href", "Css/dark.css");  
+        else{ //true 即係之前按過，而家再按所以換翻做dark theme
+            document.getElementById("pageStyle").setAttribute("href", "CSS/dark.css");  
             this.setState({isChecked : false})
         }
     }

@@ -53,6 +53,7 @@ class AssetRow extends React.Component{
     var money = "Loading"
       firebase.database().ref("players/"+ user_id+"/mode2/").on("value", function(snapshot){
         money = snapshot.val().money
+        money = money.toFixed(2)
       }, function (error){
         console.log("Error: "+error.code)
       }) 
@@ -65,6 +66,11 @@ class AssetRow extends React.Component{
   }
 }
 class StockRow extends React.Component{
+  componentDidMount(){
+    setInterval(
+      () => this.changePrice()
+    ,2000)
+  }
   addHoldings(event){
     var targetId = event.target.id
     var start = targetId.indexOf("_")+1
@@ -72,24 +78,35 @@ class StockRow extends React.Component{
     var currentHoldings
     var addStock = Number(document.getElementById("text_"+sqlID).value)
     var currentStockPrice
+    var userMoney
      //get player current hodldings
         firebase.database().ref("players/"+user_id+"/mode2/"+sqlID).on("value", function(snapshot){
           currentHoldings = Number(snapshot.val())
     }, function (error){
       console.log("Error: "+error.code)
     })
+     //get player's money
+     firebase.database().ref("players/"+user_id+"/mode2/money").on("value", function(snapshot){
+      userMoney = Number(snapshot.val())
+    })
     //getStockPrice
         firebase.database().ref("stocks/mode2/"+sqlID).on("value", function(snapshot){
-          currentStockPrice = Object.values(snapshot.val())[0]
+          currentStockPrice = snapshot.child("_price").val()
     }, function (error){
       console.log("Error: "+error.code)
     })
     //update holdings
     if (!isNaN(addStock) && addStock != ""){
-      firebase.database().ref("players/"+user_id+"/mode2/").update({
-          [sqlID] : currentHoldings + addStock
-      })
-      this.updatePrice("add",currentStockPrice * addStock)
+      if (userMoney > currentStockPrice * addStock){
+        firebase.database().ref("players/"+user_id+"/mode2/").update({
+            [sqlID] : currentHoldings + addStock
+        })
+        this.updatePrice("add",currentStockPrice * addStock)
+        console.log("Bought successful")
+      }
+      else{
+        alert("你沒有足夠的金錢")
+      }
     }
     else{
       alert("欄位: "+sqlID+"不是正確數字")
@@ -102,25 +119,37 @@ class StockRow extends React.Component{
     var currentHoldings
     var subStock = Number(document.getElementById("text_"+sqlID).value)
     var currentStockPrice
-    //console.log(sqlID)
+    var userMoney
      //get player current hodldings
         firebase.database().ref("players/"+user_id+"/mode2/"+sqlID).on("value", function(snapshot){
           currentHoldings = Number(snapshot.val())
     }, function (error){
       console.log("Error: "+error.code)
     })
+    //get player's money
+     firebase.database().ref("players/"+user_id+"/mode2/money").on("value", function(snapshot){
+      userMoney = Number(snapshot.val())
+      //console.log(userMoney)
+    })
     //getStockPrice
     firebase.database().ref("stocks/mode2/"+sqlID).on("value", function(snapshot){
-      currentStockPrice = Object.values(snapshot.val())[0]
+      currentStockPrice = snapshot.child("_price").val()
 }, function (error){
   console.log("Error: "+error.code)
 })
     //update holdings
     if (!isNaN(subStock) && subStock != ""){
-      firebase.database().ref("players/"+user_id+"/mode2/").update({
-          [sqlID] : currentHoldings - subStock
-      })
-      this.updatePrice("sub",currentStockPrice * subStock)
+      //console.log(currentStockPrice)
+        if (subStock <= currentHoldings){
+          firebase.database().ref("players/"+user_id+"/mode2/").update({
+              [sqlID] : currentHoldings - subStock
+          })
+          this.updatePrice("sub",currentStockPrice * subStock)
+          console.log("Sell successful")
+        }
+        else {
+          alert("你沒有足夠的股票")
+        }
     }
     else{
       alert("欄位: "+sqlID+"不是正確數字")
@@ -131,7 +160,7 @@ class StockRow extends React.Component{
      //get player's money
      firebase.database().ref("players/"+user_id+"/mode2/money").on("value", function(snapshot){
       userMoney = Number(snapshot.val())
-      console.log(userMoney)
+     // console.log(userMoney)
     }, function (error){
     console.log("Error: "+error.code)
     })
@@ -144,6 +173,58 @@ class StockRow extends React.Component{
       firebase.database().ref("players/"+user_id+"/mode2/").update({
         money : userMoney + actionPrice
     })
+  }
+}
+changePrice(){
+  var lastUpdate
+  var timeDifference
+  var stockArray = []
+  var stockPrice = []
+  var nextAction = []
+  var currentTime = new Date().getTime();
+  var newPrice = 1
+  //讀取最後更新時間
+  firebase.database().ref("time/mode2").on("value", function(snapshot){
+    lastUpdate = snapshot.child("lastUpdate").val()
+  })
+  timeDifference = (currentTime - lastUpdate) / 1000
+  if (timeDifference >= updateTime - 0.25) { 
+    //讀取所有股票
+      firebase.database().ref("stocks/mode2").once("value", function(snapshot){
+        stockArray = Object.keys(snapshot.val())
+        stockArray.forEach((element,index) => {
+            stockPrice[index] = snapshot.child(element+"/_price").val()
+            nextAction[index] = snapshot.child(element+"/_flow").val()
+            //console.log(nextAction[index])
+            switch (nextAction[index]){
+              case "急升":
+                newPrice = stockPrice[index] * (Math.random() * (rupRate.max - rupRate.min) + rupRate.min)
+                break;
+              case "穩升":
+                newPrice = stockPrice[index] * (Math.random() * (supRate.max - supRate.min) + supRate.min)
+                break;
+              case "平穩":
+                newPrice = stockPrice[index] * (Math.random() * (normalRate.max - normalRate.min) + normalRate.min)
+                break;
+              case "下跌":
+                newPrice = stockPrice[index] * (Math.random() * (sdownRate.max - sdownRate.min) + sdownRate.min)
+                break;
+              case "急跌":
+                newPrice = stockPrice[index] * (Math.random() * (rdownRate.max - rdownRate.min) + rdownRate.min)
+                break;
+              default :
+                newPrice = 888
+            }
+            firebase.database().ref("stocks/"+"/mode2/"+element).update({
+              _price : newPrice.toFixed(2)
+            })
+        })
+        //console.log(stockPrice)
+    })
+      firebase.database().ref("time/mode2").update({
+        lastUpdate : currentTime
+    })
+    //console.log("Time passed: "+ timeDifference)
   }
 }
     render(){
@@ -201,29 +282,25 @@ class StockTable extends React.Component{
        }, function (error){
          console.log("Error: "+error.code)
        })
-       //股票代碼
        firebase.database().ref("stocks/mode2").on("value", function(snapshot){
-        //股票編號
+        //股票編號 e.g. 001 002
            stockCode = Object.keys(snapshot.val())
-          Object.values(snapshot.val()).forEach((element,index) => {
-            stockAKA[index] = Object.keys(element)[0]
-          });
-          //股票名稱
-          Object.values(snapshot.val()).forEach((element,index) => {
-            stockName[index] = Object.values(element)[1]
-          });
-          Object.values(snapshot.val()).forEach((element,index) => {
-            stockPrice[index] = Object.values(element)[0]
-          });
-        }, function (error){
-          console.log("Error: "+error.code)
-        })
+           stockCode.forEach((element,index)=>{
+        //股票代碼
+            stockAKA[index] = snapshot.child(element + "/_code").val()
+        //股票名稱
+            stockName[index] = snapshot.child(element+"/_name").val()
+        //股票價格
+            stockPrice[index] = snapshot.child(element + "/_price").val()
+
+           })
+      })
       this.setState({uid : user_id});
-      this.setState({shareCode : stockCode})
       this.setState({shareAKA : stockAKA})
       this.setState({shareName : stockName})
+      this.setState({shareCode : stockCode})
       this.setState({sharePrice : stockPrice})
-      this.setState({holdings: playerHoldings})
+      this.setState({holdings : playerHoldings})
     }
     checkSQL(){
       var sqlAmount = []
@@ -281,6 +358,12 @@ class StockTable extends React.Component{
                 {row}
             </tbody>
             </table>
+            <hr className = "mt-5" style={{height:"2px"},{borderWidth:"0"},{color:"gray"},{backgroundColor:"gray"}}></hr>
+                <div className="float-sm-left text-sm-left">
+                  <h5>規則:</h5>
+                  <p className="small">1. 每十秒跳動一次(For Testing)</p>
+                  <p className="small">2. 每人一開始有500萬現金</p>
+                </div>
           </div> 
         );
     }

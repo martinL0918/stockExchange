@@ -48,7 +48,7 @@ body{
 }
 
 .content-wrap{
-    min-height: 95%;
+    min-height: 90%;
 }
 
 footer{
@@ -154,4 +154,25 @@ footer{
 
     .postTime-size{
         font-size: 10;
+    }
+
+    .top-nav{
+        height: 10em;
+        position: relative;
+    }
+
+    .vertical-center{
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+    .cardBorder{
+        border-style: hidden;
+        border-width: 0px;
+    }
+    .navBackIcon{
+        font-size:48px;
+        color: white
     }
