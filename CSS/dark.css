@@ -51,6 +51,14 @@ body{
     min-height: 90%;
 }
 
+.horizontal-scroll{
+    scroll-snap-type: mandatory;
+}
+
+.horizontal-child{
+    scroll-snap-align: start;
+}
+
 footer{
     height: 30px;
     margin-top: 3.5%;
