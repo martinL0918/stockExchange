@@ -2,9 +2,10 @@ const path = require('path');
 module.exports = {
     //如果有一個以上的檔案需要打包，可以傳陣列給entry
     mode: 'development',
-    entry: ['./JS/navNfooter.jsx'],
+    entry: {footer: './JS/navNfooter.jsx',
+            info: './JS/login.js'},
     output: {
-        filename: './JS/bundle.js',
+        filename: './JS/[name].bundle.js',
         path: path.resolve(__dirname, './'),
     },
     //將loader的設定寫在module的rules屬性中

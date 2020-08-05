@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = "./JS/navNfooter.jsx");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -166,17 +166,6 @@ eval("/** @license React v16.13.1\n * react.development.js\n *\n * Copyright (c)
 
 "use strict";
 eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs/react.development.js */ \"./node_modules/react/cjs/react.development.js\");\n}\n\n\n//# sourceURL=webpack:///./node_modules/react/index.js?");
-
-/***/ }),
-
-/***/ 0:
-/*!*********************************!*\
-  !*** multi ./JS/navNfooter.jsx ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("module.exports = __webpack_require__(/*! ./JS/navNfooter.jsx */\"./JS/navNfooter.jsx\");\n\n\n//# sourceURL=webpack:///multi_./JS/navNfooter.jsx?");
 
 /***/ })
 
