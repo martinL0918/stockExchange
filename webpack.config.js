@@ -4,6 +4,7 @@ module.exports = {
     mode: 'development',
     entry: {
         footer: './JS/navNfooter.jsx',
+        title: './JS/TitleComponent.jsx',
         info: './JS/userInfo.js'
     },
     output: {

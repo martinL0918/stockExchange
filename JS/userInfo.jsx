@@ -1,5 +1,6 @@
-    import React from '@babel/preset-react';
-    import Helmet from 'react-helmet';
+    import React from 'react';
+    import { Route } from 'react-router';
+    import { TitleComponent } from './JS/TitleComponent.jsx'
     
     var firebaseConfig = {
         apiKey: config.apiKey,
@@ -43,12 +44,16 @@
           setTimeout(redirect,2000)
         }
       });
-
-      const TitleComponent = ({title}) => {
-        var defaultTitle = 'Your Info';
-        return(
-            <Helmet>
-                <title>{title ? title : defaultTitle}</title>
-            </Helmet>
-        )
-      };
+    
+      const withTitle = ({ component: Component, title}) => {
+          return class Title extends Component{
+              render() {
+                  return (
+                    <React.Fragment>
+                        <TitleComponent title={title} />
+                        <Component {...this.props} />
+                    </React.Fragment>
+                  );
+              }
+          }
+      }
