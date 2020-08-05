@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/martinL0918/stockExchange#readme",
   "dependencies": {
-    "bootstrap-switch-button-react": "^1.2.0"
+    "bootstrap-switch-button-react": "^1.2.0",
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
