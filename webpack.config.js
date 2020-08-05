@@ -9,9 +9,11 @@ module.exports = {
     },
     //將loader的設定寫在module的rules屬性中
     module: {
-        //rules的值是一個陣列可以存放多個loader物件
         rules: [
-            { test: /.jsx$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-react'] } } }
+            //第一個loader編譯JSX
+            { test: /.jsx$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-react'] } } },
+            //第二個loader編譯ES6
+            { test: /.js$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } } }
         ]
     }
 };
