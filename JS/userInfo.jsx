@@ -21,30 +21,34 @@
 
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-          // User is signed in.
-          user_id = user.uid;
-          var providerData = user.providerData;
-          //read nickName
+          // User is signed in. 
           firebase.database().ref("players/"+ user.uid).on("value", function(snapshot){
-            nickName = snapshot.val().name
-            }, function (error){
-              console.log("Error: "+error.code)
-            })
-            console.log(user.uid)
-            if (user.uid != "lnUEYL7LL2auR6KyvCfxCyy85P73" && user.uid !="eiQEHqoNQXgW7cLNFroOSlpVBCc2"){
-              setInterval(notShow,1000) 
-              notShow()
-              alert("你並不是管理員，死87")
-              setTimeout(redirect,2000)
-            } 
+          nickName = snapshot.val().name
+        }, function (error){
+          console.log("Error: "+error.code)
+        })
+          logIn = "true"
+          console.log(nickName)
+          navRendered.tick()
         }
-        else {
-          alert("你並不是管理員，死87")
-          notShow()
-          setTimeout(redirect,2000)
+        else{
+            logIn = "false"
+            navRendered.tick()
         }
       });
     
+      class userInfoComponent extends React.Component{
+        constructor(props){
+          super(props);
+          this.state={
+
+          }
+        }
+        render(){
+          
+        }
+      }
+
       const withTitle = ({ component: Component, title}) => {
           return class Title extends Component{
               render() {
@@ -57,3 +61,9 @@
               }
           }
       }
+
+      export default(
+        <Route>
+          <Route path={"/" + nickName} component={userInfoComponent} />
+        </Route>
+      );

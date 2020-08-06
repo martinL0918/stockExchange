@@ -14,10 +14,8 @@ var firebaseConfig = {
 }
 var logIn = "false";
 var nickName = "載入中";
-/*
-    Change .css
-    document.getElementById("pagestyle").setAttribute("href", sheet);  
-*/
+
+// To check did the user login
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in. 
@@ -28,11 +26,9 @@ firebase.auth().onAuthStateChanged(function(user) {
     })
       logIn = "true"
       console.log(nickName)
-      navRendered.tick()
     }
     else{
         logIn = "false"
-        navRendered.tick()
     }
   });
 
@@ -58,7 +54,7 @@ class NavBar extends React.Component{
     }
     componentDidMount(){
         setInterval(() => this.tick(),2000)
-    }
+    }0
     tick(){
         if (logIn == "true"){
             this.setState({logged : (
