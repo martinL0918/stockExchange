@@ -103,8 +103,11 @@ class NavBar extends React.Component{
                     </li>
                 </ul>
                 <ul className="navbar-nav ml-auto">
-                <BootstrapSwitchButton checked={true} onstyle="outline-light" onlabel="Dark"	
-                    offstyle="outline-light" offlabel="Light" onChange = {() => this.changeStyle()} />
+                    <BootstrapSwitchButton checked={true} 
+                    onstyle="outline-light" onlabel="Dark"	
+                    offstyle="outline-light" offlabel="Light" 
+                    width={200} style="ios"
+                    onChange = {() => this.changeStyle()} />
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbardrop"
                         data-toggle="dropdown">

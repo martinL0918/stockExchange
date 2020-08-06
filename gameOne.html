@@ -21,7 +21,8 @@
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-    <div class="content-wrap">
+    <div class="navb"></div>
+    <div class="content-wrap horizontal-scroll">
       <div class = "loader" id="loader"></div>
       <div class = "container" id = "whole" style = "display: none;">
           
@@ -29,19 +30,19 @@
             <h1><b>交易所</b></h1>
             <p id="name_field" class="float-left">undefined:</p>
             <p class="label label-default float-right">你現擁有資產: <span class="label label-default" id = "asset">未能讀取</span></p>
-            
+            <section class="stocks-rough horizontal-child">
             <table class="table table-light table-striped" style="margin-top:10px">
                 <tr>
-                    <th style="width:10%"">股票編號</td>
+                    <th style="width:10%">股票編號</td>
                     <th style="width:20%">股票名稱</th>
                     <th style="width:15%">股票價格</th>
                     <th style="width:15%">持股數</th>
                     <th style="width:45%">操作</th>
                 </tr>
                 <tr>
-                    <td id="stock_num_1"">CBY</th>
-                    <td id="stock_label_1"">龐克科技</td>
-                    <td id="stock_price_1"</td>
+                    <td id="stock_num_1">CBY</th>
+                    <td id="stock_label_1">龐克科技</td>
+                    <td id="stock_price_1"></td>
                     <td id="stock_holding_1">-1</td>
                     <td>
                         <input type="number" style="width:35%" id="number_1" value=1>
@@ -50,8 +51,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td id="stock_num_2"">EFS</td>
-                    <td id="stock_label_2"">伊利莎白飛行船有限公司</td>
+                    <td id="stock_num_2">EFS</td>
+                    <td id="stock_label_2">伊利莎白飛行船有限公司</td>
                     <td id="stock_price_2"></td>
                     <td id="stock_holding_2">-1</td>
                     <td>
@@ -61,8 +62,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td id="stock_num_3"">SFL</td>
-                    <td id="stock_label_3"">星空食物研究所</td>
+                    <td id="stock_num_3">SFL</td>
+                    <td id="stock_label_3">星空食物研究所</td>
                     <td id="stock_price_3"></td>
                     <td id="stock_holding_3">-1</td>
                     <td>
@@ -73,7 +74,7 @@
                 </tr>
                 <tr>
                     <td id="stock_num_4" >DME</td>
-                    <td id="stock_label_4"">數位音元娛樂集團</td>
+                    <td id="stock_label_4">數位音元娛樂集團</td>
                     <td id="stock_price_4"></td>
                     <td id="stock_holding_4">-1</td>
                     <td>
@@ -84,7 +85,7 @@
                 </tr>
                 <tr>
                     <td id="stock_num_5" >EPC</td>
-                    <td id="stock_label_5"">未日房地產公司</td>
+                    <td id="stock_label_5">未日房地產公司</td>
                     <td id="stock_price_5"></td>
                     <td id="stock_holding_5">-1</td>
                     <td>
@@ -94,6 +95,8 @@
                     </td>
                 </tr>
             </table>
+        </section>
+            <section class="stock-details horizontal-child"></div>
             <button onclick="lightTheme()" class="btn btn-light">light Theme</button>
             <button onclick="darkTheme()" class="btn btn-dark">dark Theme</button>
             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -106,11 +109,7 @@
 </div>
     
         <!-- Footer -->
-        <footer>
-            <div class="border-line"></div>
-            <h6>Created by Martin Leung & Donald Tsang (2020)</h6>
-            <p>Github: martinL0918/stockExchange</p>
-        </footer>
+        <div class="footer"></div>
 
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
@@ -137,5 +136,7 @@
         <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
         <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <!-- Our JS file -->
+        <script type="text/babel" src="JS/bundle.js"></script>
       </body>
 </html>
