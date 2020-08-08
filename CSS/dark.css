@@ -181,6 +181,7 @@ footer{
     .horizontal-center{
         margin: 0;
         left: 50%;
+        right: 50%;
         -ms-transform: translateX(-50%);
         transform: translateX(-50%);
     }
@@ -207,6 +208,7 @@ footer{
         text-decoration: none;
         text-align: left;
         list-style: none;
+        line-height: 2em;
     }
 
     .center-justify-list{
@@ -223,4 +225,8 @@ footer{
         top: 10%;
         left: 10%;
         position: relative;
+    }
+
+    .btn-square{
+        border-radius: 0;
     }
