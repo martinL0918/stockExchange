@@ -3,19 +3,37 @@
         <title>
             
         </title>
+
+        <!-- Add Icon-->
+        <link rel="icon" href="pic/1x/ICON.png" type="image/x-icon">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="CSS/dark.css" id= "pageStyle">
     </head>
     <body>
         <div class="content-wrap">
             <!-- Navbar -->
             <div id="navb"></div>
-            <div class="container">
+            <!-- User Info row -->
+            <div class="container vertical-center horizontal-center" style="top: 18%">
                 <div class="d-flex flex-row justify-content-center">
-                    <div class="Personal-options col-md-">
+                    <div class="Personal-options col-md-4 col-sm-12">
+                        <div id="profile-img" ></div>
+                        <ul class="horizontal-center vertical-center center-justify-list" 
+                        style="font-size: medium;top: 10%; position: relative;">
+                            <li id="change-name"><a href="#">Change your name</a></li>
+                            <li id="Change-propic"><a href="#">Change your profile <picture></picture></a></li>
+                        </ul>
                     </div>
-                    <div class="Personal-Info">
+                    <div class="Personal-Info col-md-8 col-sm-12">
                         <div class="d-flex justify-content-center">
-                            <p id="user-name">Name : Loading</p>
-                            <p id="user-joindate">Joined Date : Loading</p>
+                            <ul class="vertical-center left-justify-list">
+                                <li id="user-name">Name : Loading</li>
+                                <li id="user-joindate">Joined Date : Loading</li>
+                                <li id="user-status">Status: Loading</li>
+                                <li id="user-current">Current: Loading</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
