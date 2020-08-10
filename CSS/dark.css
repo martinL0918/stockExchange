@@ -62,7 +62,7 @@ body{
 footer{
     position: relative;
     height: 30px;
-    margin-top: 3.5%;
+    margin-top: 2%;
     font-size: 2px;
 
 }
@@ -197,7 +197,7 @@ footer{
 
     .Personal-options{
         background-color: #526577;
-        height: 600px;
+        height: 70vh;
     }
 
     .Personal-Info{
