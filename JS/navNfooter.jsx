@@ -54,7 +54,7 @@ class NavBar extends React.Component{
     }
     componentDidMount(){
         setInterval(() => this.tick(),2000)
-    }0
+    }
     tick(){
         if (logIn == "true"){
             this.setState({logged : (

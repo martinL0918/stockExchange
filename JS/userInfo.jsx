@@ -1,7 +1,6 @@
-    import React from 'react';
-    import { Route } from 'react-router';
-    import { TitleComponent } from './JS/TitleComponent.jsx'
-    
+
+    //import { Route } from 'react-router';
+    //import { TitleComponent } from './JS/TitleComponent.jsx'
     var firebaseConfig = {
         apiKey: config.apiKey,
         authDomain:  config.authDomain,
@@ -13,39 +12,46 @@
         measurementId:  config.measurementId,
     };
 
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
+
       const database = firebase.database();
       var user_id;
       var nickName = "loading";
+      var logIn
 
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-          // User is signed in. 
           firebase.database().ref("players/"+ user.uid).on("value", function(snapshot){
           nickName = snapshot.val().name
         }, function (error){
           console.log("Error: "+error.code)
         })
           logIn = "true"
-          console.log(nickName)
-          navRendered.tick()
+
         }
         else{
             logIn = "false"
-            navRendered.tick()
         }
       });
-    
-      class userInfoComponent extends React.Component{
+      class UserInfoComponent extends React.Component{
         constructor(props){
           super(props);
           this.state={
-
+            name : "Loading" 
           }
         }
+        // 讀取玩家姓名
+        tick(){
+            console.log(nickName)
+        }
+        componentDidMount(){
+          setInterval(
+            () => this.tick()
+            ,2000);
+        }
         render(){
-          
+            return(
+              <div></div>
+            )
         }
       }
 
@@ -62,8 +68,13 @@
           }
       }
 
-      export default(
+      /*export default(
         <Route>
           <Route path={"/" + nickName} component={userInfoComponent} />
         </Route>
-      );
+      );*/
+
+ReactDOM.render(
+  <UserInfoComponent />,
+  document.getElementById('martinTest')
+);

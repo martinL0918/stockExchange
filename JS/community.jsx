@@ -4,6 +4,8 @@
                     <th style="width:15%">持股數</th>
                     <th style="width:45%">操作</th>
 */
+
+
 // Your web app's Firebase configuration
 var firebaseConfig = {
     apiKey: config.apiKey,
@@ -66,6 +68,7 @@ function addPost() {
     var currentTime = new Date();
     var dd = currentTime.getDate();
     var mm = currentTime.getMonth();
+    console.log("Month:" + mm)
     var hour = currentTime.getHours();
     var minute = currentTime.getMinutes();
     var second = currentTime.getSeconds();
@@ -189,4 +192,3 @@ function addPost() {
       <CardHub />,
       document.getElementById('cardBody')
     );
-  

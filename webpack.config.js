@@ -5,7 +5,7 @@ module.exports = {
     entry: {
         footer: './JS/navNfooter.jsx',
         title: './JS/TitleComponent.jsx',
-        info: './JS/userInfo.js'
+        info: './JS/userInfo.jsx'
     },
     output: {
         filename: './JS/[name].bundle.js',

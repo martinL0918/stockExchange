@@ -237,7 +237,7 @@ changePrice(){
                 <td>{this.props.AKA}</td>
                 <td>{this.props.name}</td>
                 <td>{this.props.price}</td>
-                <td>{this.props.playerData}</td>
+                <td>{this.props.playerData}</td> 
                 <td>
                     <input type="number" id = {"text_"+this.props.code} style={{width: "30px"},{marginRight: "10px"}}></input>
                     <button id = {"buybtn_"+this.props.code} onClick = {e => this.addHoldings(e)}className={"btn btn-sm btn-primary"} style={{marginRight: "10px"}}>購買</button>
