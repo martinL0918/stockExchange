@@ -68,11 +68,50 @@
           }
       }
 
-      /*export default(
-        <Route>
-          <Route path={"/" + nickName} component={userInfoComponent} />
-        </Route>
-      );*/
+      // The Main Component
+      class UserInfoComponent extends React.Component{
+        // add constructor
+        constructor(props){
+          super(props);
+        }
+        // Render the whole component
+        render(){
+          return;
+        }
+      }
+
+      // Info Options
+      class InfoOptions extends React.Component{
+        // Add constructor
+        constructor(props){
+          super(props);
+          this.state = {
+            changeName = false,
+            changePic = false,
+            profilePic = null
+          }
+        }
+
+        // Render Info Options
+        render(){
+          return;
+        }
+      }
+
+      // Info Details
+      class InfoDetails extends React.Component{
+        // Add Constructor
+        constructor(props){
+          super(props);
+          this.state = {
+
+          };
+        } 
+        // Render Info Details
+        render(){
+          return;
+        }
+      }
 
 ReactDOM.render(
   <UserInfoComponent />,
