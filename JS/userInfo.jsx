@@ -32,28 +32,6 @@
             logIn = "false"
         }
       });
-      class UserInfoComponent extends React.Component{
-        constructor(props){
-          super(props);
-          this.state={
-            name : "Loading" 
-          }
-        }
-        // 讀取玩家姓名
-        tick(){
-            console.log(nickName)
-        }
-        componentDidMount(){
-          setInterval(
-            () => this.tick()
-            ,2000);
-        }
-        render(){
-            return(
-              <div></div>
-            )
-        }
-      }
 
       const withTitle = ({ component: Component, title}) => {
           return class Title extends Component{
@@ -77,12 +55,26 @@
             userName: nickName,
           }
         }
+        
+        // 讀取玩家姓名
+        tick(){
+            console.log(nickName)
+        }
+        componentDidMount(){
+          setInterval(
+            () => this.tick()
+            ,2000);
+        }
+
         // Render the whole component
         render(){
           return(
-            <div>
-            <InfoOptions name={this.state.userName}/>
-            <InfoDetails name={this.state.userName}/>
+            <div className="container vertical-center horizontal-center">
+              <h1>Hi</h1>
+              <div className="d-flex flex-row justify-content-center shadow">
+                <InfoOptions className="Personal-options col-md-4 col-sm-12" />
+                <InfoDetails className="Personal-Info col-md-8 col-sm-12"/>
+              </div>
             </div>
           )
       }
@@ -103,18 +95,14 @@
         // Render Info Options
         render(){
           return(
-                    <div class="Personal-options col-md-4 col-sm-12">
-                        <div id="profile-img" ></div>
-                        <div class="horizontal-center vertical-center center-justify-list" 
-                        style="font-size: medium;top: 20%; position: relative;">
-                            
-                                <button href="#" type="button" class="btn btn-block btn-outline-info btn-square">Change your name</button>
-                            
-                            <li id="Change-propic">
-                                <button href="#" type="button" class="btn btn-block btn-outline-light btn-square">Change your profile picture</button>
-                            </li>
-                        </div>
-                    </div>
+            <div>
+              <div id="profile-img" ></div>
+                <div className="horizontal-center vertical-center center-justify-list" 
+                      style="font-size: medium;top: 20%; position: relative;">
+                <button href="#" type="button" className="btn btn-block btn-outline-info btn-square">Change your name</button>
+                <button href="#" type="button" className="btn btn-block btn-outline-light btn-square">Change your profile picture</button>
+              </div>
+            </div>
           );
         }
       }
@@ -125,16 +113,28 @@
         constructor(props){
           super(props);
           this.state = {
-
+            userName: 'Loading',
+            userJoinDate: 'DD/MM/YYYY',
+            userStatus: 'Loading',
+            userCurrent: '$ Loading',
           };
         } 
         // Render Info Details
         render(){
-          return;
+          return(
+            <div className="d-flex justify-content-center">
+              <ul className="vertical-center left-justify-list personal-info-list">
+                <li>Name: {userName}</li>
+                <li>Joined Date: {userJoinDate}</li>
+                <li>Status: {userStatus}</li>
+                <li>Current: {userCurrent}</li>
+              </ul>
+            </div>
+          );
         }
       }
 
 ReactDOM.render(
   <UserInfoComponent />,
-  document.getElementById('martinTest')
+  document.getElementById('user-info-component')
 );
