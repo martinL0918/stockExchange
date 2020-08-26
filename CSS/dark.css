@@ -232,3 +232,9 @@ footer{
     .btn-square{
         border-radius: 0;
     }
+
+    .detail-options-div{
+        position: relative;
+        font-size: medium;
+        top: 20%;
+    }

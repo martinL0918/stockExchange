@@ -97,8 +97,7 @@
           return(
             <div>
               <div id="profile-img" ></div>
-                <div className="horizontal-center vertical-center center-justify-list" 
-                      style="font-size: medium;top: 20%; position: relative;">
+                <div className="horizontal-center vertical-center center-justify-list detail-options-div" >
                 <button href="#" type="button" className="btn btn-block btn-outline-info btn-square">Change your name</button>
                 <button href="#" type="button" className="btn btn-block btn-outline-light btn-square">Change your profile picture</button>
               </div>
@@ -124,10 +123,10 @@
           return(
             <div className="d-flex justify-content-center">
               <ul className="vertical-center left-justify-list personal-info-list">
-                <li>Name: {userName}</li>
-                <li>Joined Date: {userJoinDate}</li>
-                <li>Status: {userStatus}</li>
-                <li>Current: {userCurrent}</li>
+                <li>Name: {this.state.userName}</li>
+                <li>Joined Date: {this.state.userJoinDate}</li>
+                <li>Status: {this.state.userStatus}</li>
+                <li>Current: {this.state.userCurrent}</li>
               </ul>
             </div>
           );
