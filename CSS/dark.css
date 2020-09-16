@@ -8,6 +8,7 @@ body{
     font-size: 20px;
     font-weight: 300;
     overflow-y: scroll; 
+    overflow-x: hidden;
 
 }
 
@@ -225,8 +226,15 @@ footer{
         top: 10%;
         left: 10%;
         position: relative;
+        border: 2px solid black;
     }
 
     .btn-square{
         border-radius: 0;
+    }
+
+    .detail-options-div{
+        position: relative;
+        font-size: medium;
+        top: 20%;
     }

@@ -107,7 +107,7 @@ class NavBar extends React.Component{
                         <a className="nav-link" href="community.html">股市新聞</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">社群</a>
+                        <a className="nav-link disabled" href="#"  >社群</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="gameMode.html">股市</a>

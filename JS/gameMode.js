@@ -16,7 +16,7 @@ var firebaseConfig = {
   document.getElementById("logout").addEventListener('click', () => {
     firebase.auth().signOut().then(function() {
       alert("你登出了")
-      location.replace("index.html")
+      location.reload()
     })
   })
   function redirect(){
