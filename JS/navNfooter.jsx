@@ -13,6 +13,7 @@ var firebaseConfig = {
     measurementId:  config.measurementId,
 }
 var logIn = "false";
+var adminIn = "false";
 var nickName = "載入中";
 
 // To check did the user login
@@ -21,14 +22,18 @@ firebase.auth().onAuthStateChanged(function(user) {
       // User is signed in. 
       firebase.database().ref("players/"+ user.uid).on("value", function(snapshot){
       nickName = snapshot.val().name
+        if (user.uid == "lnUEYL7LL2auR6KyvCfxCyy85P73" || user.uid =="eiQEHqoNQXgW7cLNFroOSlpVBCc2"){
+            adminIn = "true"
+            console.log("Admin entered the system")
+            }
+        logIn = "true"
     }, function (error){
       console.log("Error: "+error.code)
     })
-      logIn = "true"
-      console.log(nickName)
     }
     else{
         logIn = "false"
+        console.log("You are not admin")
     }
   });
 
@@ -50,6 +55,10 @@ class NavBar extends React.Component{
             <i className="far fa-user-circle" ></i>登入/創帳號
             </a>
         ),
+        isAdmin : (
+             <div>     
+           </div>
+         ),
         isChecked : false} //default value of the button
     }
     componentDidMount(){
@@ -63,6 +72,12 @@ class NavBar extends React.Component{
                 </a>
             )})
         }
+        if (adminIn == "true"){
+            this.setState({isAdmin : (
+                  <a className="dropdown-item" href="admin.html">Admin Page</a>
+            )})
+        }
+  
     }
     logOut(){
         firebase.auth().signOut().then(function() {
@@ -111,6 +126,8 @@ class NavBar extends React.Component{
                         <div className="dropdown-menu">
                             <a className="dropdown-item" href="#">中文</a>
                             <a className="dropdown-item" href="#">English</a>
+                            {this.state.isAdmin}
+
                         </div>
                     </li>
                     <li className="nav-item">

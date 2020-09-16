@@ -72,7 +72,7 @@ function addPost() {
     var hour = currentTime.getHours();
     var minute = currentTime.getMinutes();
     var second = currentTime.getSeconds();
-    currentTime = month[mm-1] +" "+ dd +" " + hour + ":"+ minute + ":"+ second 
+    currentTime = month[mm] +" "+ dd +" " + hour + ":"+ minute + ":"+ second 
     console.log(currentTime)
     firebase.database().ref("community/"+key).update({
         content : content,
