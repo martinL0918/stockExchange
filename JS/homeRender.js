@@ -21,7 +21,7 @@ class Hello extends React.Component{
 
         return (
         <div style={{backgroundColor:"red"}}>
-            <h1>Hello World</h1>
+            
             <button className="btn btn-primary" onClick={this.refresh}>Hard refresh</button>
             </div>
         
